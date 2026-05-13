@@ -1,28 +1,44 @@
 ---
 const team = [
-  { name: 'Architect', count: '1', role: 'Planner', exp: 'Senior · Staff · Principal', color: '#b794f4' },
-  { name: 'Builders', count: '2–3', role: 'Executors', exp: 'Mid-level to senior', color: '#67e8f9' },
-  { name: 'Reviewers', count: '3–4', role: 'Semantic gate', exp: 'Senior ICs', color: '#fbbf24' },
-  { name: 'PAT', count: '1–3', role: 'Continuous assurance', exp: 'Hybrid QA / engineering', color: '#86efac' },
-  { name: 'Junior', count: '1–2', role: 'Apprenticeship', exp: 'Pairing + PAT participation', color: '#7cc4ff' },
+  { name: 'Architect', role: 'Planner', exp: 'Senior · Staff · Principal', color: '#b794f4' },
+  { name: 'Builders', role: 'Executors', exp: 'Mid-level to senior', color: '#67e8f9' },
+  { name: 'Reviewers', role: 'Semantic gate', exp: 'Senior ICs', color: '#fbbf24' },
+  { name: 'PAT', role: 'Continuous assurance', exp: 'Hybrid QA / engineering', color: '#86efac' },
+  { name: 'Junior', role: 'Apprenticeship', exp: 'Pairing + PAT participation', color: '#7cc4ff' },
+];
+
+const ratios = [
+  'Reviewer capacity ≥ Builder capacity',
+  '≥ 2 Planner-eligible per Domain',
+  '~1 PAT per 3–5 active Builder seats',
 ];
 ---
 
 <div class="card p-6 md:p-8">
   <div class="mb-6">
     <div class="eyebrow mb-1">A balanced GI team per domain</div>
-    <div class="text-sm text-muted">More Reviewers than Builders is intentional; review capacity is the throughput ceiling.</div>
+    <div class="text-sm text-muted">Reviewer capacity is the throughput ceiling. Sizing follows ratios, not fixed counts.</div>
   </div>
+
+  <div class="mb-6 grid gap-3 md:grid-cols-3">
+    {ratios.map((r) => (
+      <div class="card p-3 text-xs font-mono text-muted leading-relaxed">
+        <span class="text-accent">→</span> {r}
+      </div>
+    ))}
+  </div>
+
   <div class="grid gap-4 md:grid-cols-5">
     {team.map((t) => (
       <div class="card p-4 flex flex-col" style={`border-top: 3px solid ${t.color};`}>
-        <div class="flex items-baseline justify-between">
-          <span class="font-mono text-[10px] uppercase tracking-wider text-muted">{t.role}</span>
-          <span class="font-mono text-2xl font-semibold" style={`color: ${t.color}`}>{t.count}</span>
-        </div>
-        <div class="mt-2 text-base font-medium">{t.name}</div>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-muted">{t.role}</span>
+        <div class="mt-2 text-base font-medium" style={`color: ${t.color}`}>{t.name}</div>
         <div class="mt-1 text-xs text-muted leading-snug">{t.exp}</div>
       </div>
     ))}
+  </div>
+
+  <div class="mt-5 text-xs text-muted leading-relaxed">
+    Role names describe <em>modes of work</em>, not job titles. A certified engineer can pick up Builder or Reviewer tasks on Tracks they hold the right cert for, subject to per-artifact separation of duties.
   </div>
 </div>

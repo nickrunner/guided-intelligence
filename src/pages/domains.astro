@@ -10,7 +10,7 @@ const definitions = [
     dim: 'Domain',
     suffix: '2D',
     color: '#b794f4',
-    body: 'The complete semantic and architectural surface owned by a single Planner. Contains every product capability, every technical layer, all invariants, all internal contracts, and all Cells.',
+    body: 'The complete semantic and architectural surface owned by a single accountable Planner. Contains every product capability, every technical layer, all invariants, all internal contracts, and all Cells. Planner-eligible peers may co-plan or rotate in; accountability stays with one person.',
   },
   {
     dim: 'Track',
@@ -94,7 +94,7 @@ const certification = [
       <div class="eyebrow mb-3">§7.5 · Staffing through Tracks</div>
       <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Certification, not org chart.</h2>
       <p class="mt-3 text-muted leading-relaxed">
-        Staffing follows Track certification, not arbitrary team structures. Expertise becomes legible.
+        Certification grants <em>permission</em>, not assignment — a person can be certified for Builder <em>and</em> Reviewer work on the same Track and pick up either as needed. Staffing follows Track certification, not arbitrary team structures. Expertise becomes legible.
       </p>
     </div>
     <div class="grid gap-5 md:grid-cols-3">
@@ -118,9 +118,10 @@ const certification = [
       <div class="card p-7">
         <div class="eyebrow mb-3">§7.7 · Architectural boundaries</div>
         <ul class="space-y-2 text-sm">
-          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No Builder edits outside certified Tracks</li>
-          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No Reviewer approvals outside oversight lanes</li>
-          <li class="flex gap-2"><span style="color: var(--accent);">→</span>Cross-Cell changes routed through the Planner</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No edits to a Track without Builder certification on that Track</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No approvals on a Track without Reviewer certification on that Track</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No review of one's own Builder work on the same artifact</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>Cross-Cell changes routed through the accountable Planner</li>
           <li class="flex gap-2"><span style="color: var(--accent);">→</span>Explicit contracts between Cells and Tracks</li>
           <li class="flex gap-2"><span style="color: var(--accent);">→</span>Invariants as first-class boundaries</li>
         </ul>

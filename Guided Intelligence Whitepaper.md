@@ -1088,7 +1088,9 @@ GI achieves velocity by structuring engineering responsibility into a clear, hie
 
 ## **7.1 What a GI Domain Is**
 
-A **GI Domain** is the complete semantic and architectural surface owned by a single Planner. It contains every product capability, every technical layer, all invariants, all internal contracts, and all Cells where execution occurs.
+A **GI Domain** is the complete semantic and architectural surface owned by a **single accountable Planner**. It contains every product capability, every technical layer, all invariants, all internal contracts, and all Cells where execution occurs.
+
+Multiple Planner-eligible engineers may co-plan, cover, or rotate in, but semantic accountability for the Domain rests with one person at any given time.
 
 A Domain is defined by two orthogonal Tracks:
 
@@ -1165,11 +1167,15 @@ Planner responsibilities:
 
 The Planner is the only role with vertical \+ horizontal authority.
 
+Accountability is not the same as solo work. The accountable Planner may delegate planning sub-work to Planner-eligible peers, co-plan large initiatives, or rotate the role for coverage. What cannot be shared is the final architectural call — at any moment one person carries the call for the Domain.
+
 ---
 
 ## **7.5 Staffing Through Tracks**
 
 GI staffing depends on **Track certification**, not arbitrary team structures.
+
+**Certifications grant permission, not assignment.** A person certified to perform Builder work on a Track and Reviewer work on the same Track may pick up either kind of task from the queue as the team needs. Specialization is allowed; pigeonholing is not. The only hard work-level constraint is **per-artifact separation of duties** — you cannot review your own Builder output.
 
 ### **Builder Certification**
 
@@ -1218,9 +1224,10 @@ GI relies on semantic clarity to maintain velocity. Track–Cell structuring pro
 
 Cells create predictable architectural edges. GI enforces:
 
-* no Builder edits outside certified Tracks  
-* no Reviewer approvals outside oversight lanes  
-* cross-Cell changes routed through the Planner  
+* no edits to a Track without Builder certification on that Track  
+* no approvals on a Track without Reviewer certification on that Track  
+* no review of one's own Builder work on the same artifact (separation of duties)  
+* cross-Cell changes routed through the accountable Planner  
 * explicit contracts between Cells and Tracks  
 * invariants as first-class boundaries
 
@@ -1304,9 +1311,9 @@ These steps alone increase throughput dramatically, even before staffing adjustm
 
 GI teams are intentionally small. Execution is cheap; semantic clarity is expensive.
 
-A typical GI domain team is composed of:
+Role names below describe **modes of work**, not job titles. A given engineer holds certifications that grant permission to perform one or more modes; teams self-allocate across the queue accordingly (see §7.5). Sizing guidance lives in §8.3.
 
-## **Architect (Planner) — 1 per domain**
+## **Architect (Planner)**
 
 **Experience:** Senior, Staff, or Principal  
 **Role:** Semantic owner of the domain  
@@ -1318,9 +1325,9 @@ A typical GI domain team is composed of:
 * coordinate cross-domain contracts,  
 * ensure long-term coherence.
 
-The Architect is the **single point of semantic authority**, not a bottleneck for execution.
+The Architect is the **single accountable point of semantic authority**, not a bottleneck for execution. Planner-eligible peers may co-plan or rotate in; accountability stays with one person.
 
-## **Builders — 2–3 per domain**
+## **Builders**
 
 **Experience:** Mid-level to senior  
 **Role:** Flow drivers
@@ -1333,9 +1340,9 @@ The Architect is the **single point of semantic authority**, not a bottleneck fo
 * resolve ambiguity quickly,  
 * keep the pipeline moving.
 
-Builders are the primary throughput engine.
+Builder work is performed by any engineer holding Builder certification on the relevant Track. Builders are the primary throughput engine; in practice most teams have engineers who lean toward this mode.
 
-## **Reviewers — 3–4 per domain**
+## **Reviewers**
 
 **Experience:** Senior ICs or engineers with strong semantic skills  
 **Role:** Final semantic gate  
@@ -1347,7 +1354,7 @@ Builders are the primary throughput engine.
 * approval or rejection of Builder output,  
 * overseeing ring promotions and severity classification.
 
-More Reviewers than Builders is intentional — review capacity is the throughput ceiling of a GI system.
+Reviewer work is performed by any engineer holding Reviewer certification on the relevant Track, subject to per-artifact separation of duties (you cannot review your own Builder output). **More Reviewer capacity than Builder capacity is intentional** — review throughput is the ceiling of a GI system.
 
 ## **PAT Engineers — shared across domains**
 
@@ -1388,13 +1395,20 @@ For senior engineers, GI elevates responsibility rather than reducing it. Review
 
 # **8.3 Resource Allocation Model**
 
-A balanced GI team per domain typically looks like:
+Headcount is emergent, not prescribed. A Domain is sized by its track count, its flow demands, and the structural ratios below — not by a fixed roster.
 
-* 1 Architect  
-* 2–3 Builders  
-* 3–4 Reviewers  
-* 1–3 PAT Engineers  
-* 1–2 Junior Engineers (paired \+ PAT)
+**Minimum viable Domain team:**
+
+* 1 accountable Planner  
+* at least 1 additional Planner-eligible peer (cover and co-planning)  
+* enough Builder \+ Reviewer certified capacity to keep flow unblocked across the Domain's Tracks  
+* at least 1 PAT contributor (often shared across Domains)
+
+**Structural ratios that matter:**
+
+* Reviewer capacity ≥ Builder capacity (the throughput ceiling)  
+* roughly 1 PAT contributor per 3–5 active Builder seats  
+* ≥ 2 Planner-eligible engineers per Domain (bus factor on accountability)
 
 This structure gives the system:
 
@@ -1404,7 +1418,7 @@ This structure gives the system:
 * robust system validation,  
 * room for talent development.
 
-This ratio scales linearly across domains without collapsing under coordination overhead.
+The ratios scale linearly across domains without collapsing under coordination overhead.
 
 ---
 
@@ -1469,7 +1483,8 @@ Teams that resist these principles regress into “AI-assisted Agile”—the wo
 
 These patterns collapse GI into chaos:
 
-* shared domain ownership (ambiguity),  
+* shared *accountability* for a domain (ambiguity),  
+* rigid role-lock (engineers pigeonholed into one mode of work despite holding broader certifications),  
 * multi-domain PRs (coupling),  
 * PAT operating as a release gate (batching),  
 * Builder scope creep (semantic drift),  
