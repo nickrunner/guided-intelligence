@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0d10"/>
+      <stop offset="100%" stop-color="#15181c"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7cc4ff"/>
+      <stop offset="100%" stop-color="#b794f4"/>
+    </linearGradient>
+    <linearGradient id="textfade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.72"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.85" cy="0.15" r="0.6">
+      <stop offset="0%" stop-color="#7cc4ff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#7cc4ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.05" cy="0.95" r="0.6">
+      <stop offset="0%" stop-color="#b794f4" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#b794f4" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- accent top hairline -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#brand)" opacity="0.55"/>
+
+  <!-- Logo mark -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="72" height="72" rx="16" fill="url(#brand)"/>
+    <path d="M 40.5 23 L 24.75 23 A 7.5 7.5 0 0 0 17.25 30.5 L 17.25 41.5 A 7.5 7.5 0 0 0 24.75 49 L 40.5 49 L 40.5 37.5 L 31.5 37.5"
+      stroke="#0b0d10" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="55" cy="27" r="3.6" fill="#0b0d10"/>
+    <circle cx="55" cy="36" r="3.6" fill="#0b0d10"/>
+    <circle cx="55" cy="45" r="3.6" fill="#0b0d10"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="172" y="132" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="26" font-weight="600" fill="#e3e6eb" letter-spacing="-0.3">
+    Guided Intelligence
+  </text>
+
+  <!-- Eyebrow -->
+  <text x="80" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="500" fill="#8a92a0" letter-spacing="3.6">
+    WHITEPAPER · AI-NATIVE ENGINEERING
+  </text>
+
+  <!-- Headline -->
+  <text x="80" y="320" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="84" font-weight="600" fill="url(#textfade)" letter-spacing="-2.5">
+    Human-in-the-Loop,
+  </text>
+  <text x="80" y="412" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="84" font-weight="600" fill="url(#textfade)" letter-spacing="-2.5">
+    AI-Native engineering.
+  </text>
+
+  <!-- Subhead -->
+  <text x="80" y="478" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="28" font-weight="400" fill="#8a92a0" letter-spacing="-0.4">
+    An operating model built for 10× velocity without losing stability.
+  </text>
+
+  <!-- Stat row -->
+  <g transform="translate(80, 528)" font-family="Inter, -apple-system, system-ui, sans-serif">
+    <g>
+      <text x="0" y="0" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#8a92a0" letter-spacing="2.2">ROLES</text>
+      <text x="0" y="28" font-size="20" font-weight="500" fill="#e3e6eb">Planner · Builder · Reviewer</text>
+    </g>
+    <g transform="translate(420, 0)">
+      <text x="0" y="0" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#8a92a0" letter-spacing="2.2">FLOW</text>
+      <text x="0" y="28" font-size="20" font-weight="500" fill="#e3e6eb">Continuous · single-threaded</text>
+    </g>
+    <g transform="translate(820, 0)">
+      <text x="0" y="0" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#8a92a0" letter-spacing="2.2">SAFETY</text>
+      <text x="0" y="28" font-size="20" font-weight="500" fill="#e3e6eb">7 layers · Sev1–Sev5</text>
+    </g>
+  </g>
+
+  <!-- URL -->
+  <text x="1120" y="132" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#8a92a0" letter-spacing="1.4">
+    usegi.dev
+  </text>
+</svg>

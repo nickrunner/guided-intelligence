@@ -8,7 +8,11 @@ const headings = await getHeadings();
 const tocHeadings = headings.filter((h) => h.depth <= 2);
 ---
 
-<BaseLayout title="Full Whitepaper" current="/whitepaper">
+<BaseLayout
+  title="Full Whitepaper"
+  current="/whitepaper"
+  description="The complete Guided Intelligence whitepaper: the case against Agile under AI acceleration, and the operating model that replaces it."
+>
   <section class="border-b border-subtle relative overflow-hidden">
     <div class="absolute inset-0 opacity-[0.18] pointer-events-none grid-pattern" aria-hidden="true"></div>
     <div class="container-full relative py-16 md:py-20">

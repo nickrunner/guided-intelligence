@@ -6,7 +6,11 @@ import { glossary } from '../data/glossary';
 const sorted = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
 ---
 
-<BaseLayout title="Glossary" current="/glossary">
+<BaseLayout
+  title="Glossary"
+  current="/glossary"
+  description="Definitions for every term in the Guided Intelligence whitepaper — from Execution Plan and PAT to Cell, Track, and the Severity ladder."
+>
   <SectionHero
     eyebrow="Key Terms"
     title="Glossary"

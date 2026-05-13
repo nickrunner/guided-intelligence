@@ -7,15 +7,64 @@ interface Props {
   title: string;
   description?: string;
   current?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const {
   title,
   description = 'Guided Intelligence: a Human-in-the-Loop, AI-Native engineering operating model built for 10× velocity.',
   current,
+  ogImage = '/og-image.png',
+  ogImageAlt = 'Guided Intelligence — a Human-in-the-Loop, AI-Native engineering operating model.',
 } = Astro.props;
 
 const fullTitle = title === 'Guided Intelligence' ? title : `${title} · Guided Intelligence`;
+
+const siteOrigin = (Astro.site ?? new URL('https://usegi.dev')).origin;
+const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
+const absoluteOgImage = new URL(ogImage, siteOrigin).toString();
+
+const isHome = current === '/';
+const isWhitepaper = current === '/whitepaper';
+
+const baseEntity = {
+  '@context': 'https://schema.org',
+  name: 'Guided Intelligence',
+  url: siteOrigin,
+};
+
+let structuredData: Record<string, unknown>;
+if (isHome) {
+  structuredData = {
+    ...baseEntity,
+    '@type': 'WebSite',
+    description,
+    inLanguage: 'en-US',
+  };
+} else if (isWhitepaper) {
+  structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: fullTitle,
+    description,
+    url: canonical,
+    image: absoluteOgImage,
+    inLanguage: 'en-US',
+    author: { '@type': 'Organization', name: 'Guided Intelligence' },
+    publisher: { '@type': 'Organization', name: 'Guided Intelligence' },
+  };
+} else {
+  structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: fullTitle,
+    description,
+    url: canonical,
+    inLanguage: 'en-US',
+    isPartOf: { '@type': 'WebSite', name: 'Guided Intelligence', url: siteOrigin },
+  };
+}
 ---
 
 <!doctype html>
@@ -25,13 +74,35 @@ const fullTitle = title === 'Guided Intelligence' ? title : `${title} · Guided 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Guided Intelligence" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={isWhitepaper ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Guided Intelligence" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
     <meta name="theme-color" content="#0b0d10" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="preconnect" href="https://rsms.me" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
     <script is:inline>
       (function () {
         try {
