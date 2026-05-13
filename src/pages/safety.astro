@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+import SafetyStack from '../components/diagrams/SafetyStack.astro';
+import SeverityLadder from '../components/diagrams/SeverityLadder.astro';
+
+const sev5Steps = [
+  'Immediately freeze merges',
+  'Halt promotions',
+  'Rollback or toggle flags',
+  'Notify domain stakeholders',
+  'Patch fix through the GI Flow',
+  'Resume once domain invariants are restored',
+];
+
+const patModes = [
+  {
+    name: 'Exploratory',
+    color: '#86efac',
+    body: 'Freeform, curiosity-driven probing for edge-case failures, unexpected system interactions, stateful errors, cross-domain inconsistencies. AI assists with permutations; human intuition guides direction.',
+  },
+  {
+    name: 'Regression',
+    color: '#7cc4ff',
+    body: 'Automated, maintained, and evolved by PAT. Covers domain-critical workflows, integration paths, invariants, known-sensitive operation sequences. Runs continuously across rings.',
+  },
+];
+---
+
+<BaseLayout title="Layered Safety" current="/safety">
+  <SectionHero
+    eyebrow="§6 · Layered Safety"
+    title="Velocity without safety is useless."
+    lede="GI maintains stability through a layered, always-on safety architecture that replaces sprint-based QA cycles with continuous validation, rapid containment, and clear severity-driven rules."
+  />
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§6.1–6.3 · The stack</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Seven layers. No single layer must be perfect.</h2>
+      <p class="mt-3 text-muted leading-relaxed">
+        Each layer is optimized for speed and minimal blast radius. Together they ensure every merge ships by default — but no severe issue can propagate.
+      </p>
+    </div>
+    <SafetyStack />
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§6.4 · Severity Model</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Severity, not process, governs flow control.</h2>
+      <p class="mt-3 text-muted leading-relaxed">
+        The severity system determines how defects impact flow. Only Sev5 stops the line.
+      </p>
+    </div>
+    <SeverityLadder />
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1fr] items-start">
+      <div>
+        <div class="eyebrow mb-3">§6.5 · Sev5 protocol</div>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Stop-the-Line</h2>
+        <p class="mt-3 text-muted leading-relaxed">
+          When a Sev5 is detected at Ring 0 or Ring 1, the response is sequenced and immediate. The key point:
+          <span class="text-[color:var(--fg)]">Sev5 halts future flow — it does not ship buggy code to production.</span>
+          Ring 0/1 guarantees safe containment.
+        </p>
+      </div>
+      <ol class="space-y-2">
+        {sev5Steps.map((step, i) => (
+          <li class="card p-4 flex items-center gap-4" style="border-left: 3px solid #f87171;">
+            <span class="font-mono text-lg font-semibold" style="color: #f87171;">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text-sm">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§6.8–6.12 · PAT</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Asynchronous system validation.</h2>
+      <p class="mt-3 text-muted leading-relaxed">
+        PAT runs in parallel to the GI Flow. It examines the deployed system rather than gating individual PRs or waiting for a batch of merges. Its influence is interrupt-driven, not gate-driven.
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      {patModes.map((m) => (
+        <article class="card p-6" style={`border-top: 3px solid ${m.color};`}>
+          <div class="eyebrow mb-2" style={`color: ${m.color}`}>{m.name} testing</div>
+          <p class="text-sm leading-relaxed">{m.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-10 card p-8 md:p-10">
+      <p class="text-lg md:text-2xl leading-relaxed max-w-3xl">
+        The long-term equilibrium: <span class="text-[color:var(--accent)]">humans test ideas</span>; <span class="text-[color:#86efac]">AI tests permutations</span>.
+      </p>
+      <p class="mt-4 text-muted text-sm leading-relaxed">
+        Over time, PAT evolves into a self-improving guardian layer where human testers guide the semantic areas worth probing and AI handles the mechanical sweep. The safety net scales with system complexity without slowing flow.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="card p-8 md:p-10 max-w-3xl">
+      <div class="eyebrow mb-3">§6.7 · Defining property</div>
+      <p class="text-lg md:text-xl leading-relaxed">
+        Velocity is continuous. Safety is continuous. <span class="text-[color:var(--accent)]">The only time flow stops is when the system must be protected.</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/safety" />
+  </div>
+</BaseLayout>

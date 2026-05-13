@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+import DomainGrid from '../components/diagrams/DomainGrid.astro';
+import CareerLadder from '../components/diagrams/CareerLadder.astro';
+
+const definitions = [
+  {
+    dim: 'Domain',
+    suffix: '2D',
+    color: '#b794f4',
+    body: 'The complete semantic and architectural surface owned by a single Planner. Contains every product capability, every technical layer, all invariants, all internal contracts, and all Cells.',
+  },
+  {
+    dim: 'Track',
+    suffix: '1D',
+    color: '#7cc4ff',
+    body: 'A one-dimensional lane of responsibility. Capability Tracks represent product areas (Mapping, Identity, Notifications, Checkout). Layer Tracks represent technical layers (Mobile UI, Cloud API, Data, Firmware).',
+  },
+  {
+    dim: 'Cell',
+    suffix: '0D',
+    color: '#67e8f9',
+    body: 'The atomic responsibility point. Each Cell is the intersection of a Capability Track and a Layer Track — the smallest unit of correctness in GI.',
+  },
+];
+
+const cellRules = [
+  'Execution Plans target a single Cell unless explicitly decomposed.',
+  'Review authority is defined at the Cell level.',
+  'Invariants are expressed at Cell boundaries.',
+  'Cross-cell work must pass through the Planner.',
+];
+
+const certification = [
+  { role: 'Builder', color: '#67e8f9', body: 'Certified on one or more Tracks. Requires semantic fluency, plan-execution accuracy, invariant familiarity, and capacity to handle every Cell involving the Track.' },
+  { role: 'Reviewer', color: '#fbbf24', body: 'Deeper semantic mastery. Multi-Track fluency, cross-Cell implication awareness, judgment about invariant correctness. Not Cell-certified — Track-plus oversight certified.' },
+  { role: 'Planner', color: '#b794f4', body: 'Eligible after certification across all Tracks in a Domain, demonstrated cross-Track reasoning, and proven ability to manage Cell interactions holistically.' },
+];
+---
+
+<BaseLayout title="Domains, Tracks & Cells" current="/domains">
+  <SectionHero
+    eyebrow="§7 · Architectural Geometry"
+    title="Domains, Tracks, and Cells."
+    lede="GI achieves velocity by structuring responsibility into a clear, hierarchical geometry. Planners govern Domains; Builders and Reviewers certify on Tracks; Execution Plans target Cells."
+  />
+
+  <section class="container-wide py-16">
+    <DomainGrid />
+  </section>
+
+  <section class="container-wide py-12">
+    <div class="grid gap-5 md:grid-cols-3">
+      {definitions.map((d) => (
+        <article class="card p-6" style={`border-top: 3px solid ${d.color};`}>
+          <div class="flex items-center justify-between">
+            <div class="eyebrow" style={`color: ${d.color}`}>{d.dim}</div>
+            <span class="font-mono text-xs opacity-60">{d.suffix}</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed">{d.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <div class="eyebrow mb-3">§7.3 · Cells</div>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Atomicity for high-velocity flow.</h2>
+        <p class="mt-3 text-muted leading-relaxed">
+          Cells create the atomicity necessary for high-velocity flow without semantic sprawl. They are the enforcement points where invariants attach and architectural edges are made predictable.
+        </p>
+      </div>
+      <ul class="space-y-3">
+        {cellRules.map((r, i) => (
+          <li class="card p-4 flex items-start gap-4">
+            <span class="font-mono text-xs text-muted pt-0.5 w-6">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text-sm leading-relaxed">{r}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§7.5 · Staffing through Tracks</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Certification, not org chart.</h2>
+      <p class="mt-3 text-muted leading-relaxed">
+        Staffing depends on Track certification, not arbitrary team structures. Expertise becomes legible.
+      </p>
+    </div>
+    <div class="grid gap-5 md:grid-cols-3">
+      {certification.map((c) => (
+        <article class="card p-6" style={`border-top: 3px solid ${c.color};`}>
+          <div class="chip mb-3" style={`color: ${c.color}; border-color: color-mix(in srgb, ${c.color} 50%, transparent);`}>
+            <span class="chip-dot" style={`background: ${c.color}`}></span>
+            {c.role}
+          </div>
+          <p class="text-sm leading-relaxed">{c.body}</p>
+        </article>
+      ))}
+    </div>
+    <div class="mt-10">
+      <CareerLadder />
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="card p-7">
+        <div class="eyebrow mb-3">§7.7 · Architectural boundaries</div>
+        <ul class="space-y-2 text-sm">
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No Builder edits outside certified Tracks</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>No Reviewer approvals outside oversight lanes</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>Cross-Cell changes routed through the Planner</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>Explicit contracts between Cells and Tracks</li>
+          <li class="flex gap-2"><span style="color: var(--accent);">→</span>Invariants as first-class boundaries</li>
+        </ul>
+      </div>
+      <div class="card p-7">
+        <div class="eyebrow mb-3">§7.8 · Cross-domain coordination</div>
+        <ul class="space-y-2 text-sm">
+          <li class="flex gap-2"><span style="color: #b794f4;">→</span>Planners form contract surfaces</li>
+          <li class="flex gap-2"><span style="color: #b794f4;">→</span>Execution Plans decomposed into respective Cells per Domain</li>
+          <li class="flex gap-2"><span style="color: #b794f4;">→</span>No cross-Domain PRs</li>
+          <li class="flex gap-2"><span style="color: #b794f4;">→</span>No cross-Domain mutable state</li>
+          <li class="flex gap-2"><span style="color: #b794f4;">→</span>Coordination is Planner-to-Planner only</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/domains" />
+  </div>
+</BaseLayout>

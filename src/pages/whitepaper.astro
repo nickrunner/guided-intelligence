@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Content, getHeadings } from '../content/whitepaper.md';
+
+const headings = await getHeadings();
+
+// Top-2-level TOC only
+const tocHeadings = headings.filter((h) => h.depth <= 2);
+---
+
+<BaseLayout title="Full Whitepaper" current="/whitepaper">
+  <section class="border-b border-subtle relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.18] pointer-events-none grid-pattern" aria-hidden="true"></div>
+    <div class="container-full relative py-16 md:py-20">
+      <div class="eyebrow mb-4">Whitepaper · Complete</div>
+      <h1 class="text-3xl md:text-5xl font-semibold tracking-tight max-w-4xl">The complete Guided Intelligence whitepaper</h1>
+      <p class="mt-4 text-lg text-muted max-w-2xl leading-relaxed">
+        The unabridged source document. For a guided tour with diagrams, browse the section pages from the navigation.
+      </p>
+    </div>
+  </section>
+
+  <div class="container-full py-12 grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)]">
+    <aside class="hidden lg:block">
+      <div class="sticky top-20">
+        <div class="eyebrow mb-3">Contents</div>
+        <nav class="space-y-1 text-sm max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+          {tocHeadings.map((h) => (
+            <a
+              href={`#${h.slug}`}
+              class:list={[
+                'block py-1.5 px-2 rounded-md transition-colors hover:text-[color:var(--fg)]',
+                h.depth === 1 ? 'text-[color:var(--fg)] font-medium mt-3 first:mt-0' : 'text-muted pl-4',
+              ]}
+            >
+              {h.text}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </aside>
+
+    <article class="prose-gi max-w-prose">
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

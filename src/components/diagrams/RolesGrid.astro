@@ -1,0 +1,88 @@
+---
+interface Props {
+  compact?: boolean;
+  showPAT?: boolean;
+}
+const { compact = false, showPAT = true } = Astro.props;
+
+const roles = [
+  {
+    slug: 'planner',
+    name: 'Planner',
+    subtitle: 'Architect',
+    color: '#b794f4',
+    role: 'Semantic owner of the domain.',
+    blurb: 'Translates ambiguous intent into Execution Plans, constraints, and invariants. Sets the semantic frame the system operates within.',
+    does: ['Express intent with crisp boundaries', 'Define invariants & integration surfaces', 'Resolve cross-domain contracts'],
+    doesNot: ['Granular task breakdown', 'Write scaffolding or boilerplate', 'Dictate mechanical sequence'],
+  },
+  {
+    slug: 'builder',
+    name: 'Builder',
+    subtitle: 'Executor',
+    color: '#67e8f9',
+    role: 'Flow driver. Supervises AI execution.',
+    blurb: 'Drives AI generation of code, tests, and migrations aligned to the plan. Resolves ambiguity early and keeps the pipeline unblocked.',
+    does: ['Drive AI generation aligned to plan', 'First-pass validation before review', 'Ask Planner when ambiguous'],
+    doesNot: ['Make architectural decisions', 'Expand scope', 'Perform semantic approval'],
+  },
+  {
+    slug: 'reviewer',
+    name: 'Reviewer',
+    subtitle: 'Semantic Gatekeeper',
+    color: '#fbbf24',
+    role: 'Final semantic authority before release.',
+    blurb: 'Protects intent alignment, invariant integrity, and domain coherence. The only human positioned at the merge boundary.',
+    does: ['Validate intent & invariants', 'Approve / reject / clarify', 'Oversee ring promotion'],
+    doesNot: ['Rewrite code manually', 'Mechanical / syntax review', 'Re-plan or expand scope'],
+  },
+  {
+    slug: 'pat',
+    name: 'PAT',
+    subtitle: 'Continuous Assurance',
+    color: '#86efac',
+    role: 'Async system-level validation.',
+    blurb: 'Operates outside the Planner-Builder-Reviewer loop. Probes edge cases, runs regressions, and surfaces severity signals from production rings.',
+    does: ['Exploratory testing across rings', 'Maintain evolving regression packs', 'Surface Sev1–Sev5 signals'],
+    doesNot: ['Gate releases or batch reviews', 'Replace Reviewer judgment', 'Stop flow except via Sev5'],
+  },
+];
+
+const display = showPAT ? roles : roles.slice(0, 3);
+---
+
+<div class:list={['grid gap-5', display.length === 4 ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3']}>
+  {display.map((r) => (
+    <article class="card p-6 flex flex-col">
+      <div class="flex items-center justify-between">
+        <span class="chip" style={`color: ${r.color}; border-color: color-mix(in srgb, ${r.color} 50%, transparent);`}>
+          <span class="chip-dot" style={`background: ${r.color}`}></span>
+          {r.name}
+        </span>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-muted">{r.subtitle}</span>
+      </div>
+      <h3 class="mt-4 text-lg font-semibold leading-snug">{r.role}</h3>
+      {!compact && <p class="mt-2 text-sm text-muted leading-relaxed">{r.blurb}</p>}
+      {!compact && (
+        <div class="mt-5 grid grid-cols-1 gap-4">
+          <div>
+            <div class="eyebrow text-[10px] mb-2">Does</div>
+            <ul class="space-y-1 text-sm">
+              {r.does.map((d) => (
+                <li class="flex gap-2"><span style={`color: ${r.color}`}>→</span><span>{d}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div class="eyebrow text-[10px] mb-2">Does not</div>
+            <ul class="space-y-1 text-sm text-muted">
+              {r.doesNot.map((d) => (
+                <li class="flex gap-2"><span class="opacity-50">×</span><span>{d}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </article>
+  ))}
+</div>

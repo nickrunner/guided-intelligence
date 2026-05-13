@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark light;
+    --bg: #0b0d10;
+    --bg-elev: #15181c;
+    --fg: #e3e6eb;
+    --fg-muted: #8a92a0;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #7cc4ff;
+  }
+
+  :root.light {
+    color-scheme: light;
+    --bg: #fafafa;
+    --bg-elev: #ffffff;
+    --fg: #15181c;
+    --fg-muted: #5a6270;
+    --border: rgba(0, 0, 0, 0.08);
+    --accent: #1b6cba;
+  }
+
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: rgba(124, 196, 255, 0.25);
+    color: inherit;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans tracking-tight;
+    color: var(--fg);
+  }
+
+  a {
+    @apply transition-colors;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto px-6;
+    max-width: 72ch;
+  }
+
+  .container-wide {
+    @apply mx-auto px-6;
+    max-width: 1180px;
+  }
+
+  .container-full {
+    @apply mx-auto px-6;
+    max-width: 1280px;
+  }
+
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    @apply rounded-xl;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-mono uppercase tracking-wider;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .chip-dot {
+    @apply h-1.5 w-1.5 rounded-full;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0b0d10;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--fg);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em];
+    color: var(--fg-muted);
+  }
+
+  .pull-quote {
+    @apply border-l-2 pl-5 italic;
+    border-color: var(--accent);
+    color: var(--fg);
+  }
+}
+
+@layer utilities {
+  .border-subtle {
+    border-color: var(--border);
+  }
+  .bg-elev {
+    background: var(--bg-elev);
+  }
+  .text-muted {
+    color: var(--fg-muted);
+  }
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .text-gradient {
+    background: linear-gradient(180deg, var(--fg) 0%, var(--fg-muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* prose tweaks for whitepaper page */
+.prose-gi {
+  color: var(--fg);
+}
+.prose-gi h1, .prose-gi h2, .prose-gi h3, .prose-gi h4 {
+  color: var(--fg);
+  scroll-margin-top: 6rem;
+}
+.prose-gi h1 { @apply text-3xl mt-12 mb-6 font-semibold tracking-tight; }
+.prose-gi h2 { @apply text-2xl mt-10 mb-4 font-semibold tracking-tight; }
+.prose-gi h3 { @apply text-xl mt-8 mb-3 font-semibold tracking-tight; }
+.prose-gi h4 { @apply text-lg mt-6 mb-2 font-semibold; }
+.prose-gi p { @apply my-4 leading-relaxed; color: var(--fg); }
+.prose-gi ul, .prose-gi ol { @apply my-4 pl-6; }
+.prose-gi ul { list-style: disc; }
+.prose-gi ol { list-style: decimal; }
+.prose-gi li { @apply my-1.5; color: var(--fg); }
+.prose-gi li::marker { color: var(--fg-muted); }
+.prose-gi strong { color: var(--fg); font-weight: 600; }
+.prose-gi em { font-style: italic; }
+.prose-gi a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(124,196,255,0.4); text-underline-offset: 3px; }
+.prose-gi hr { border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.prose-gi blockquote { @apply border-l-2 pl-4 italic my-4; border-color: var(--accent); color: var(--fg-muted); }
+.prose-gi code { @apply font-mono text-sm rounded px-1 py-0.5; background: rgba(255,255,255,0.05); }

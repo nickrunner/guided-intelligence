@@ -1,0 +1,16 @@
+---
+import { findTerm } from '../data/glossary';
+interface Props {
+  slug: string;
+  label?: string;
+}
+const { slug, label } = Astro.props;
+const term = findTerm(slug);
+const displayLabel = label ?? term?.abbreviation ?? term?.term ?? slug;
+---
+
+<a
+  href={`/glossary#${slug}`}
+  class="underline decoration-dotted decoration-[color:var(--accent)] underline-offset-4 hover:text-[color:var(--accent)] transition-colors"
+  title={term?.definition}
+>{displayLabel}</a>

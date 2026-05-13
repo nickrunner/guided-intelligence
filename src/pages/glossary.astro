@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import { glossary } from '../data/glossary';
+
+const sorted = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
+---
+
+<BaseLayout title="Glossary" current="/glossary">
+  <SectionHero
+    eyebrow="Key Terms"
+    title="Glossary"
+    lede="Every distinctive concept in the Guided Intelligence model — defined once, referenced everywhere."
+  />
+
+  <section class="container-wide py-16">
+    <div class="grid gap-4 md:grid-cols-2">
+      {sorted.map((t) => (
+        <article id={t.slug} class="card p-6 scroll-mt-24">
+          <header class="flex items-center gap-3 mb-3">
+            <h2 class="text-lg font-semibold">{t.term}</h2>
+            {t.abbreviation && (
+              <span class="chip"><span class="chip-dot" style="background: var(--accent);"></span>{t.abbreviation}</span>
+            )}
+          </header>
+          <p class="text-[15px] text-muted leading-relaxed">{t.definition}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+import AgileVsGI from '../components/diagrams/AgileVsGI.astro';
+
+const concepts = [
+  {
+    no: '2.1',
+    title: 'Human-in-the-Loop as a First Principle',
+    color: '#7cc4ff',
+    body: 'Humans no longer execute most of the work. Instead, they guide, constrain, and validate it. HIL in GI is not "humans approving AI output" — it is a structured responsibility model.',
+    points: [
+      { role: 'Planners', text: 'set intent, constraints, and architectural boundaries.' },
+      { role: 'Builders', text: 'supervise AI execution and maintain fidelity to those constraints.' },
+      { role: 'Reviewers', text: 'perform semantic approval and protect domain invariants.' },
+    ],
+    closing: 'The goal is not to remove humans — it is to separate humans from work that no longer requires them.',
+  },
+  {
+    no: '2.2',
+    title: 'From Mechanical to Semantic Work',
+    color: '#b794f4',
+    body: 'Mechanical work — coding, scaffolding, refactors, formatting — moves to AI. What remains is the semantic layer: what should be built, why it matters, whether it preserves system integrity.',
+    points: [
+      { role: 'Mechanical', text: 'cheap. Deterministic. Executed by AI.' },
+      { role: 'Semantic', text: 'expensive. Judgment-driven. Owned by humans.' },
+    ],
+    closing: 'The profile of engineering work changes: fewer executors, more stewards.',
+  },
+  {
+    no: '2.3',
+    title: 'Continuous Flow vs. Batching',
+    color: '#67e8f9',
+    body: 'Batching — sprints, release trains, QA cycles, PR queues — stabilizes human-paced work by delaying it. When AI executes instantly, batching becomes the primary source of latency.',
+    points: [
+      { role: 'No sprint boundaries', text: 'work moves to the next step as soon as the current one completes.' },
+      { role: 'No release windows', text: 'changes deploy continuously through rings.' },
+      { role: 'No PR queues', text: 'one Reviewer is the semantic gate.' },
+    ],
+    closing: 'The pipeline assumes work should be moving at all times unless halted for safety.',
+  },
+  {
+    no: '2.4',
+    title: 'The 10× Hypothesis',
+    color: '#fbbf24',
+    body: 'AI writes code 100× faster. The system-level 10× multiplier comes from eliminating the surrounding human overhead — not from typing faster.',
+    points: [
+      { role: 'Limiting reagent', text: 'shifts from engineering labor hours to semantic clarity.' },
+      { role: 'Direction', text: '"10×" is a target architecture for velocity, not a fixed performance number.' },
+    ],
+    closing: 'GI creates the conditions under which order-of-magnitude improvement is achievable as AI continues to advance.',
+  },
+];
+---
+
+<BaseLayout title="Core Concepts" current="/concepts">
+  <SectionHero
+    eyebrow="§2 · Core Concepts"
+    title="Humans guide. Machines execute. Flow is continuous."
+    lede="GI is built around four foundational ideas that establish the operating assumptions for every role, workflow, and safety mechanism in the system."
+  />
+
+  <section class="container-wide py-20">
+    <div class="grid gap-6 md:grid-cols-2">
+      {concepts.map((c) => (
+        <article class="card p-7 flex flex-col" style={`border-top: 3px solid ${c.color};`}>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-[11px] uppercase tracking-wider" style={`color: ${c.color}`}>§{c.no}</span>
+          </div>
+          <h2 class="text-xl font-semibold leading-snug">{c.title}</h2>
+          <p class="mt-3 text-[15px] text-muted leading-relaxed">{c.body}</p>
+          <ul class="mt-5 space-y-2 text-sm">
+            {c.points.map((p) => (
+              <li class="flex gap-3">
+                <span class="font-mono text-[11px] uppercase tracking-wider whitespace-nowrap pt-0.5" style={`color: ${c.color}`}>{p.role}</span>
+                <span class="text-muted">{p.text}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-5 pt-5 border-t border-subtle text-sm leading-relaxed">{c.closing}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-wide pb-20">
+    <div class="mb-8">
+      <div class="eyebrow mb-3">§1.1 · Why Agile breaks under AI</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Same rituals. Opposite effect.</h2>
+      <p class="mt-3 text-muted max-w-2xl leading-relaxed">
+        Agile rituals stabilized human execution. Under AI acceleration, these stabilizers reverse polarity.
+      </p>
+    </div>
+    <AgileVsGI />
+  </section>
+
+  <section class="container-wide pb-20">
+    <div class="card p-8 md:p-10">
+      <div class="eyebrow mb-3">§1.2 · The new constraint</div>
+      <p class="text-xl md:text-2xl leading-relaxed max-w-3xl">
+        "If AI performs mechanical work orders of magnitude faster, engineering productivity becomes a function of <span class="text-[color:var(--accent)]">human semantic clarity</span> — not human labor volume."
+      </p>
+    </div>
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/concepts" />
+  </div>
+</BaseLayout>

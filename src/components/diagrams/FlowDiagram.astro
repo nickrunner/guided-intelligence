@@ -1,0 +1,80 @@
+---
+interface Props {
+  variant?: 'full' | 'compact';
+}
+const { variant = 'full' } = Astro.props;
+---
+
+<figure class="card p-6 md:p-8 overflow-x-auto" aria-label="The GI Flow">
+  <svg
+    viewBox="0 0 1080 220"
+    class="w-full min-w-[760px] h-auto"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <!-- nodes -->
+    <g font-family="JetBrains Mono, monospace" font-size="11">
+      <!-- Planner -->
+      <g transform="translate(20,70)">
+        <rect width="170" height="80" rx="10" fill="rgba(183,148,244,0.10)" stroke="#b794f4" stroke-width="1.5"/>
+        <text x="14" y="22" fill="#b794f4" font-size="10" letter-spacing="1.4">PLANNER</text>
+        <text x="14" y="46" fill="currentColor" font-size="14" font-family="InterVariable, Inter, sans-serif" font-weight="600">Execution Plan</text>
+        <text x="14" y="64" fill="currentColor" opacity="0.6" font-size="11" font-family="InterVariable, Inter, sans-serif">Scope · invariants</text>
+      </g>
+
+      <!-- arrow 1 -->
+      <line x1="195" y1="110" x2="240" y2="110" stroke="currentColor" stroke-width="1.5" marker-end="url(#flow-arrow)" opacity="0.5"/>
+
+      <!-- Builder -->
+      <g transform="translate(245,70)">
+        <rect width="170" height="80" rx="10" fill="rgba(103,232,249,0.08)" stroke="#67e8f9" stroke-width="1.5"/>
+        <text x="14" y="22" fill="#67e8f9" font-size="10" letter-spacing="1.4">BUILDER</text>
+        <text x="14" y="46" fill="currentColor" font-size="14" font-family="InterVariable, Inter, sans-serif" font-weight="600">AI Execution</text>
+        <text x="14" y="64" fill="currentColor" opacity="0.6" font-size="11" font-family="InterVariable, Inter, sans-serif">Code · tests · diffs</text>
+      </g>
+
+      <line x1="420" y1="110" x2="465" y2="110" stroke="currentColor" stroke-width="1.5" marker-end="url(#flow-arrow)" opacity="0.5"/>
+
+      <!-- Reviewer -->
+      <g transform="translate(470,70)">
+        <rect width="170" height="80" rx="10" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="14" y="22" fill="#fbbf24" font-size="10" letter-spacing="1.4">REVIEWER</text>
+        <text x="14" y="46" fill="currentColor" font-size="14" font-family="InterVariable, Inter, sans-serif" font-weight="600">Semantic Gate</text>
+        <text x="14" y="64" fill="currentColor" opacity="0.6" font-size="11" font-family="InterVariable, Inter, sans-serif">Intent · invariants</text>
+      </g>
+
+      <line x1="645" y1="110" x2="690" y2="110" stroke="currentColor" stroke-width="1.5" marker-end="url(#flow-arrow)" opacity="0.5"/>
+
+      <!-- Rings -->
+      <g transform="translate(695,70)">
+        <rect width="170" height="80" rx="10" fill="rgba(124,196,255,0.08)" stroke="#7cc4ff" stroke-width="1.5"/>
+        <text x="14" y="22" fill="#7cc4ff" font-size="10" letter-spacing="1.4">DEPLOY</text>
+        <text x="14" y="46" fill="currentColor" font-size="14" font-family="InterVariable, Inter, sans-serif" font-weight="600">Ring 0 → Ring 1</text>
+        <text x="14" y="64" fill="currentColor" opacity="0.6" font-size="11" font-family="InterVariable, Inter, sans-serif">Canary deploy</text>
+      </g>
+
+      <line x1="870" y1="110" x2="915" y2="110" stroke="currentColor" stroke-width="1.5" marker-end="url(#flow-arrow)" opacity="0.5"/>
+
+      <!-- PAT (parallel/continuous) -->
+      <g transform="translate(920,70)">
+        <rect width="140" height="80" rx="10" fill="rgba(134,239,172,0.08)" stroke="#86efac" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="14" y="22" fill="#86efac" font-size="10" letter-spacing="1.4">PAT</text>
+        <text x="14" y="46" fill="currentColor" font-size="14" font-family="InterVariable, Inter, sans-serif" font-weight="600">Continuous</text>
+        <text x="14" y="64" fill="currentColor" opacity="0.6" font-size="11" font-family="InterVariable, Inter, sans-serif">Async validation</text>
+      </g>
+    </g>
+
+    <!-- bottom annotation -->
+    <g font-family="JetBrains Mono, monospace" font-size="10" fill="currentColor" opacity="0.4">
+      <text x="20" y="190">INTENT</text>
+      <text x="540" y="190" text-anchor="middle">→ continuous, single-threaded forward flow →</text>
+      <text x="1060" y="190" text-anchor="end">PRODUCTION</text>
+    </g>
+  </svg>
+</figure>

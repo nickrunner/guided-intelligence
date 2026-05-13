@@ -1,0 +1,95 @@
+---
+const paths = [
+  {
+    id: 'A',
+    title: 'Standard Reject',
+    direction: 'Reviewer → Builder',
+    color: '#67e8f9',
+    when: 'Output does not match the plan; invariants violated; semantics incorrect; diff too unfocused.',
+    rule: 'Local and fast. Builder fixes immediately; no parallel tasks.',
+    nodes: [
+      { label: 'Reviewer', accent: '#fbbf24', x: 30 },
+      { label: 'Builder', accent: '#67e8f9', x: 240 },
+    ],
+    arrow: { from: 200, to: 250 },
+  },
+  {
+    id: 'B',
+    title: 'Plan Rejection',
+    direction: 'Reviewer → Planner → Builder',
+    color: '#b794f4',
+    when: 'Planner misunderstood intent; direction is wrong even though output matches the plan.',
+    rule: 'Planner revises the plan incrementally; Builder resumes execution.',
+    nodes: [
+      { label: 'Reviewer', accent: '#fbbf24', x: 30 },
+      { label: 'Planner', accent: '#b794f4', x: 175 },
+      { label: 'Builder', accent: '#67e8f9', x: 320 },
+    ],
+    arrow: null,
+  },
+  {
+    id: 'C',
+    title: 'Builder Blocked',
+    direction: 'Builder → Planner',
+    color: '#fbbf24',
+    when: 'Plan is ambiguous, contract missing, dependency unknown, domain rule unclear.',
+    rule: 'Cheapest backflow when caught early. Builder stops; Planner clarifies in minutes/hours.',
+    nodes: [
+      { label: 'Builder', accent: '#67e8f9', x: 30 },
+      { label: 'Planner', accent: '#b794f4', x: 240 },
+    ],
+    arrow: { from: 200, to: 250 },
+  },
+];
+---
+
+<div class="grid gap-6 md:grid-cols-3">
+  {paths.map((p) => (
+    <article class="card p-6 flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <span class="chip" style={`color: ${p.color}; border-color: color-mix(in srgb, ${p.color} 50%, transparent);`}>
+          <span class="chip-dot" style={`background: ${p.color}`}></span>
+          Path {p.id}
+        </span>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-muted">Backflow</span>
+      </div>
+      <h3 class="text-lg font-semibold mb-1">{p.title}</h3>
+      <div class="font-mono text-xs text-muted mb-4">{p.direction}</div>
+
+      <!-- mini diagram -->
+      <svg viewBox="0 0 400 100" class="w-full h-auto my-3" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id={`bf-${p.id}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+          </marker>
+        </defs>
+        {p.nodes.map((n) => (
+          <g transform={`translate(${n.x}, 28)`}>
+            <rect width="120" height="44" rx="8" fill={`color-mix(in srgb, ${n.accent} 12%, transparent)`} stroke={n.accent} stroke-width="1.5"/>
+            <text x="60" y="27" text-anchor="middle" fill={n.accent} font-family="JetBrains Mono, monospace" font-size="11">{n.label.toUpperCase()}</text>
+          </g>
+        ))}
+        {p.nodes.length === 2 && (
+          <line x1="155" y1="50" x2="235" y2="50" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" marker-end={`url(#bf-${p.id})`} opacity="0.6"/>
+        )}
+        {p.nodes.length === 3 && (
+          <Fragment>
+            <line x1="155" y1="50" x2="170" y2="50" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" marker-end={`url(#bf-${p.id})`} opacity="0.6"/>
+            <line x1="300" y1="50" x2="315" y2="50" stroke="currentColor" stroke-width="1.5" marker-end={`url(#bf-${p.id})`} opacity="0.6"/>
+          </Fragment>
+        )}
+      </svg>
+
+      <div class="mt-2 space-y-3 text-sm">
+        <div>
+          <div class="eyebrow text-[10px] mb-1">When</div>
+          <p class="text-muted leading-relaxed">{p.when}</p>
+        </div>
+        <div>
+          <div class="eyebrow text-[10px] mb-1">Rule</div>
+          <p class="leading-relaxed">{p.rule}</p>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>

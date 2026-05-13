@@ -1,0 +1,100 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
+const capabilityTracks = ['Checkout', 'Identity', 'Mapping', 'Notifications'];
+const layerTracks = ['Mobile UI', 'Cloud API', 'Data', 'Firmware'];
+
+// example highlighted cells (active execution)
+const active = new Set(['1-1', '2-0', '0-2', '3-1']);
+const planned = new Set(['2-2', '1-3']);
+---
+
+<figure class="card p-6 md:p-8" aria-label="Domain × Tracks × Cells">
+  <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <div class="eyebrow mb-1">A GI Domain</div>
+      <div class="text-sm text-muted">Capability Tracks (vertical) × Layer Tracks (horizontal) = Cells</div>
+    </div>
+    <div class="flex items-center gap-4 text-xs font-mono">
+      <span class="inline-flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-sm" style="background: #7cc4ff"></span>active cell</span>
+      <span class="inline-flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-sm border-subtle border" style="background: rgba(124,196,255,0.12)"></span>planned</span>
+      <span class="inline-flex items-center gap-2 text-muted"><span class="h-2.5 w-2.5 rounded-sm border-subtle border"></span>cell</span>
+    </div>
+  </div>
+
+  <div class="relative overflow-x-auto">
+    <!-- planner span indicator -->
+    <div class="hidden md:block absolute -top-1 -left-1 -right-1 -bottom-1 rounded-xl pointer-events-none" style="background: linear-gradient(135deg, rgba(183,148,244,0.06), transparent 60%); border: 1px dashed rgba(183,148,244,0.4);"></div>
+
+    <div class="relative grid" style={`grid-template-columns: 140px repeat(${layerTracks.length}, minmax(120px, 1fr));`}>
+      <!-- corner cell with planner badge -->
+      <div class="px-3 py-3 border-b border-r border-subtle">
+        <span class="chip" style="color: #b794f4; border-color: rgba(183,148,244,0.5);">
+          <span class="chip-dot" style="background: #b794f4"></span>
+          Planner
+        </span>
+        <div class="text-[11px] text-muted mt-2 font-mono">spans the domain</div>
+      </div>
+      <!-- layer track headers -->
+      {layerTracks.map((l) => (
+        <div class="px-3 py-3 border-b border-subtle text-center">
+          <div class="font-mono text-[10px] uppercase tracking-wider text-muted">Layer</div>
+          <div class="text-sm font-medium mt-0.5">{l}</div>
+        </div>
+      ))}
+
+      <!-- rows -->
+      {capabilityTracks.map((cap, row) => (
+        <Fragment>
+          <div class="px-3 py-4 border-r border-b border-subtle flex flex-col justify-center">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-muted">Capability</div>
+            <div class="text-sm font-medium mt-0.5">{cap}</div>
+          </div>
+          {layerTracks.map((_, col) => {
+            const key = `${row}-${col}`;
+            const isActive = active.has(key);
+            const isPlanned = planned.has(key);
+            return (
+              <div class="border-b border-subtle p-3 relative">
+                <div
+                  class:list={[
+                    'h-12 rounded-md flex items-center justify-center text-[10px] font-mono transition-colors',
+                  ]}
+                  style={
+                    isActive
+                      ? 'background: rgba(124,196,255,0.18); border: 1px solid #7cc4ff; color: #7cc4ff;'
+                      : isPlanned
+                      ? 'background: rgba(124,196,255,0.05); border: 1px dashed rgba(124,196,255,0.4); color: var(--fg-muted);'
+                      : 'border: 1px solid var(--border); color: var(--fg-muted); opacity: 0.65;'
+                  }
+                >
+                  {isActive ? 'cell ●' : isPlanned ? 'cell ◌' : 'cell'}
+                </div>
+              </div>
+            );
+          })}
+        </Fragment>
+      ))}
+    </div>
+  </div>
+
+  {!compact && (
+    <div class="mt-6 grid gap-3 md:grid-cols-3 text-sm">
+      <div class="text-muted">
+        <span class="font-mono text-[10px] uppercase tracking-wider block mb-1">Track</span>
+        1D lane of expertise. Builders & Reviewers certify on tracks.
+      </div>
+      <div class="text-muted">
+        <span class="font-mono text-[10px] uppercase tracking-wider block mb-1">Cell</span>
+        0D atomic execution unit. Where Execution Plans land.
+      </div>
+      <div class="text-muted">
+        <span class="font-mono text-[10px] uppercase tracking-wider block mb-1">Domain</span>
+        Full 2D surface owned by a single Planner.
+      </div>
+    </div>
+  )}
+</figure>

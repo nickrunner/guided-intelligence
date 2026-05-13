@@ -1,0 +1,70 @@
+---
+const intentTypes = [
+  { name: 'Business', who: 'Leadership · PM · Strategy', color: '#7cc4ff' },
+  { name: 'Design', who: 'UX · Brand', color: '#b794f4' },
+  { name: 'Marketing', who: 'Growth · Revenue', color: '#fbbf24' },
+  { name: 'Technical', who: 'Architects · Builders · Reviewers', color: '#67e8f9' },
+  { name: 'Emergent', who: 'PAT · Sev events · Reviewer feedback', color: '#86efac' },
+];
+---
+
+<figure class="card p-6 md:p-8" aria-label="Intent funnel">
+  <div class="grid gap-6 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
+    <!-- intent types -->
+    <div class="space-y-2">
+      <div class="eyebrow mb-3">Intent sources</div>
+      {intentTypes.map((t) => (
+        <div class="card p-3 flex items-center justify-between gap-3" style={`border-left: 3px solid ${t.color};`}>
+          <div>
+            <div class="text-sm font-medium">{t.name}</div>
+            <div class="font-mono text-[10px] uppercase tracking-wider text-muted">{t.who}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- arrow -->
+    <div class="hidden md:flex items-center justify-center h-full">
+      <svg width="60" height="100" viewBox="0 0 60 100">
+        <line x1="0" y1="50" x2="50" y2="50" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+        <path d="M44 44 L52 50 L44 56 Z" fill="currentColor" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- queue + planner -->
+    <div class="space-y-3">
+      <div class="card p-4">
+        <div class="eyebrow mb-1">Intent Queue</div>
+        <div class="text-sm">One per domain. Throttled by Planner capacity signals.</div>
+      </div>
+      <div class="card p-4" style="border-left: 3px solid #b794f4;">
+        <div class="chip mb-2" style="color: #b794f4; border-color: rgba(183,148,244,0.5);">
+          <span class="chip-dot" style="background: #b794f4"></span>
+          Planner
+        </div>
+        <div class="text-sm">Interprets · sets boundaries · decomposes into atomic Execution Plans.</div>
+      </div>
+    </div>
+
+    <!-- arrow -->
+    <div class="hidden md:flex items-center justify-center h-full">
+      <svg width="60" height="100" viewBox="0 0 60 100">
+        <line x1="0" y1="50" x2="50" y2="50" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+        <path d="M44 44 L52 50 L44 56 Z" fill="currentColor" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- execution plans -->
+    <div class="space-y-2">
+      <div class="eyebrow mb-3">Execution Plans</div>
+      {['Atomic', 'Testable', 'Deployable', 'Reversible'].map((trait) => (
+        <div class="card p-3 flex items-center gap-3">
+          <span class="font-mono text-[10px] uppercase tracking-wider text-[color:var(--accent)]">{trait}</span>
+        </div>
+      ))}
+      <div class="text-xs text-muted mt-2 leading-relaxed">
+        1 intent → many plans. Each ships independently through Ring 0 → Ring 1.
+      </div>
+    </div>
+  </div>
+</figure>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  title?: string;
+  variant?: 'default' | 'warning' | 'success' | 'info' | 'danger';
+  icon?: string;
+}
+const { title, variant = 'default' } = Astro.props;
+
+const variantStyles: Record<string, string> = {
+  default: 'border-subtle',
+  warning: 'border-l-4',
+  success: 'border-l-4',
+  info: 'border-l-4',
+  danger: 'border-l-4',
+};
+
+const variantAccent: Record<string, string> = {
+  default: 'transparent',
+  warning: '#fbbf24',
+  success: '#86efac',
+  info: '#7cc4ff',
+  danger: '#f87171',
+};
+---
+
+<aside
+  class:list={['card my-6 p-5', variantStyles[variant]]}
+  style={variant === 'default' ? '' : `border-left-color: ${variantAccent[variant]};`}
+>
+  {title && (
+    <div class="flex items-center gap-2 mb-2">
+      <span class="font-mono text-xs uppercase tracking-wider text-muted">{title}</span>
+    </div>
+  )}
+  <div class="text-[15px] leading-relaxed">
+    <slot />
+  </div>
+</aside>

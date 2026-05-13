@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FlowDiagram from '../components/diagrams/FlowDiagram.astro';
+import RolesGrid from '../components/diagrams/RolesGrid.astro';
+import DomainGrid from '../components/diagrams/DomainGrid.astro';
+import SeverityLadder from '../components/diagrams/SeverityLadder.astro';
+import AgileVsGI from '../components/diagrams/AgileVsGI.astro';
+
+const principles = [
+  {
+    title: 'Agile breaks under AI acceleration',
+    body: "Sprint cycles, QA phases, multi-stage review gates were designed to stabilize humans at human speed. When execution happens in seconds, the stabilizers reverse polarity and become bottlenecks.",
+  },
+  {
+    title: 'Coordination is the new constraint',
+    body: 'AI absorbs mechanical work. What remains is intent clarification, architectural alignment, semantic review — the human activities around code. Execution becomes cheap; misalignment becomes expensive.',
+  },
+  {
+    title: '10× via semantic clarity, not raw output',
+    body: 'AI already writes code 100× faster. The 10× system-level multiplier comes from eliminating the surrounding human overhead — not from typing faster.',
+  },
+];
+---
+
+<BaseLayout title="Guided Intelligence" current="/">
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-subtle">
+    <div class="absolute inset-0 opacity-[0.22] pointer-events-none grid-pattern" aria-hidden="true"></div>
+    <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.4;"></div>
+
+    <div class="container-wide relative py-24 md:py-32">
+      <div class="eyebrow mb-6">Whitepaper · An AI-native engineering operating model</div>
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight max-w-5xl leading-[1.05] text-gradient">
+        Guided Intelligence
+      </h1>
+      <p class="mt-6 text-xl md:text-2xl text-muted max-w-3xl leading-relaxed">
+        A Human-in-the-Loop, AI-Native engineering operating model aimed at <span class="text-[color:var(--fg)]">10× velocity</span> with stability.
+        Humans guide. Machines execute. Flow is continuous.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a href="/whitepaper" class="btn btn-primary">Read the whitepaper →</a>
+        <a href="/concepts" class="btn btn-ghost">Explore concepts</a>
+        <a href="/flow" class="btn btn-ghost">See the flow</a>
+      </div>
+
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
+        {[
+          { k: 'Roles', v: 'Planner · Builder · Reviewer' },
+          { k: 'Flow', v: 'Continuous · single-threaded' },
+          { k: 'Safety', v: '7 layers · Sev1–Sev5' },
+          { k: 'Geometry', v: 'Domain × Track × Cell' },
+        ].map((s) => (
+          <div class="card p-3.5">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-muted">{s.k}</div>
+            <div class="text-sm mt-1 font-medium">{s.v}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="container-wide py-24">
+    <div class="max-w-2xl mb-14">
+      <div class="eyebrow mb-3">§1 · The problem</div>
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">
+        The constraint moved. The process didn't.
+      </h2>
+      <p class="mt-4 text-lg text-muted leading-relaxed">
+        For two decades, productivity gains came from layering on top of Agile and DevOps. AI breaks the equilibrium — and exposes the mismatch between capability and process.
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      {principles.map((p, i) => (
+        <article class="card p-6">
+          <div class="font-mono text-[11px] text-[color:var(--accent)] mb-3">{String(i + 1).padStart(2, '0')}</div>
+          <h3 class="text-lg font-semibold leading-snug">{p.title}</h3>
+          <p class="mt-3 text-sm text-muted leading-relaxed">{p.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12">
+      <AgileVsGI />
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="container-wide py-24 border-t border-subtle">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-12">
+      <div class="max-w-2xl">
+        <div class="eyebrow mb-3">§3 · Roles</div>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Three roles. Four cognitive modes.</h2>
+        <p class="mt-4 text-lg text-muted leading-relaxed">
+          GI organizes work around <strong>Planner</strong>, <strong>Builder</strong>, and <strong>Reviewer</strong> — supported by continuous <strong>PAT</strong> validation. These are semantic responsibilities, not job titles.
+        </p>
+      </div>
+      <a href="/roles" class="btn btn-ghost">All roles →</a>
+    </div>
+    <RolesGrid />
+  </section>
+
+  <!-- FLOW -->
+  <section class="container-wide py-24 border-t border-subtle">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-10">
+      <div class="max-w-2xl">
+        <div class="eyebrow mb-3">§4 · The Flow</div>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">From intent to production, continuously.</h2>
+        <p class="mt-4 text-lg text-muted leading-relaxed">
+          One Execution Plan at a time. No sprint boundaries. No release windows. PAT validates the running system asynchronously.
+        </p>
+      </div>
+      <a href="/flow" class="btn btn-ghost">See backflow paths →</a>
+    </div>
+    <FlowDiagram />
+  </section>
+
+  <!-- DOMAIN -->
+  <section class="container-wide py-24 border-t border-subtle">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr] items-start">
+      <div>
+        <div class="eyebrow mb-3">§7 · Geometry</div>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Domains, Tracks, and Cells.</h2>
+        <p class="mt-4 text-lg text-muted leading-relaxed">
+          A Planner governs an entire <strong>Domain</strong>. Builders and Reviewers certify along one-dimensional <strong>Tracks</strong>. Execution Plans land in atomic <strong>Cells</strong> at the intersections.
+        </p>
+        <a href="/domains" class="btn btn-ghost mt-6">Explore the geometry →</a>
+      </div>
+      <DomainGrid compact />
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section class="container-wide py-24 border-t border-subtle">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-10">
+      <div class="max-w-2xl">
+        <div class="eyebrow mb-3">§6 · Safety</div>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Velocity is continuous. Safety is continuous.</h2>
+        <p class="mt-4 text-lg text-muted leading-relaxed">
+          A layered system replaces sprint-based QA with always-on validation. Only Sev5 stops the line.
+        </p>
+      </div>
+      <a href="/safety" class="btn btn-ghost">All seven layers →</a>
+    </div>
+    <SeverityLadder compact />
+  </section>
+
+  <!-- CTA -->
+  <section class="container-wide py-24 border-t border-subtle">
+    <div class="card p-10 md:p-16 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.4] pointer-events-none" style="background: radial-gradient(800px circle at 80% 20%, rgba(124,196,255,0.12), transparent 50%), radial-gradient(600px circle at 10% 90%, rgba(183,148,244,0.10), transparent 50%);"></div>
+      <div class="relative max-w-3xl">
+        <div class="eyebrow mb-4">A new equilibrium</div>
+        <h2 class="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
+          Velocity with stability. Semantics with automation. Human judgment at the center.
+        </h2>
+        <p class="mt-6 text-lg text-muted leading-relaxed">
+          GI is not a radical reinvention — it is the minimal set of structural rules required to let AI-native engineering work at scale, safely, predictably.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/whitepaper" class="btn btn-primary">Read the full whitepaper</a>
+          <a href="/implementation" class="btn btn-ghost">How to adopt it</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

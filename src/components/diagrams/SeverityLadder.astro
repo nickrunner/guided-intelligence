@@ -1,0 +1,79 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
+const levels = [
+  {
+    label: 'Sev 5',
+    name: 'Stop-the-Line',
+    color: '#f87171',
+    bandWidth: '100%',
+    examples: 'Catastrophic invariant break · unsafe migration · domain-violating logic · reproducible crash threatening stability',
+    action: 'Freeze merges & promotions · rollback or flag-off · fix immediately · resume once invariants are restored',
+  },
+  {
+    label: 'Sev 4',
+    name: 'Major',
+    color: '#fb923c',
+    bandWidth: '78%',
+    examples: 'Localized API errors · noticeable performance degradation',
+    action: 'Flow continues · prioritized fix · optional domain-level constraints',
+  },
+  {
+    label: 'Sev 3',
+    name: 'Moderate',
+    color: '#fde68a',
+    bandWidth: '60%',
+    examples: 'Non-catastrophic bugs · UI errors · regressions in narrow surfaces',
+    action: 'Flow continues · scheduled fix · extra checks applied if needed',
+  },
+  {
+    label: 'Sev 2',
+    name: 'Minor',
+    color: '#a7f3d0',
+    bandWidth: '42%',
+    examples: 'Minor UI issues · edge-case quirks',
+    action: 'Logged · scheduled · no effect on flow',
+  },
+  {
+    label: 'Sev 1',
+    name: 'Trivial',
+    color: '#86efac',
+    bandWidth: '26%',
+    examples: 'Logging noise · cosmetic inconsistencies',
+    action: 'Logged · scheduled · no effect on flow',
+  },
+];
+---
+
+<figure class="card p-6 md:p-8" aria-label="Severity model">
+  <div class="mb-5">
+    <div class="eyebrow mb-1">Severity governs flow control</div>
+    <div class="text-sm text-muted">Only Sev5 stops the line. Everything else flows through with appropriate response.</div>
+  </div>
+
+  <div class="space-y-2.5">
+    {levels.map((l) => (
+      <div class="grid items-center gap-3 md:gap-4 grid-cols-[80px_1fr] md:grid-cols-[100px_180px_1fr_1fr]">
+        <div class="font-mono text-xs uppercase tracking-wider" style={`color: ${l.color}`}>
+          {l.label}
+        </div>
+        <div class="hidden md:flex items-center gap-2">
+          <div class="h-2.5 rounded-full" style={`width: ${l.bandWidth}; background: linear-gradient(90deg, ${l.color}, color-mix(in srgb, ${l.color} 30%, transparent));`}></div>
+        </div>
+        <div class="text-sm md:hidden font-medium">{l.name}</div>
+        <div class="hidden md:block text-sm">
+          <div class="font-medium mb-0.5">{l.name}</div>
+          <div class="text-muted text-[13px] leading-snug">{l.examples}</div>
+        </div>
+        <div class="text-sm text-muted leading-snug">
+          {!compact && <span class="md:hidden block text-[12px] mb-1">{l.examples}</span>}
+          <span class="block md:inline font-mono text-[11px] uppercase tracking-wider opacity-70">Action</span>
+          <span class="block md:inline md:ml-2 text-[13px]">{l.action}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</figure>

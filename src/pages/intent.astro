@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+import IntentFunnel from '../components/diagrams/IntentFunnel.astro';
+
+const intentAttributes = [
+  { name: 'Desired outcome', desc: 'Business, user, or technical.' },
+  { name: 'Constraints', desc: 'Time, risk tolerance, rollout strategy, UX boundaries.' },
+  { name: 'Scope boundaries', desc: 'What is explicitly out of scope.' },
+  { name: 'Acceptance signals', desc: 'How the organization knows the intent is fulfilled.' },
+  { name: 'Supporting artifacts', desc: 'Design mocks, data tables, copy, diagrams.' },
+];
+
+const intentTypes = [
+  { name: 'Business', who: 'Leadership · PM · Strategy', examples: 'Launch a subscription tier · improve checkout conversion · enable international shipping' },
+  { name: 'Design', who: 'UX · Brand', examples: 'New visual hierarchy for onboarding · replace navigation · update accessibility patterns' },
+  { name: 'Marketing', who: 'Growth · Revenue', examples: 'Add referral incentives · seasonal campaigns · track key funnel events' },
+  { name: 'Technical', who: 'Architects · Builders · Reviewers', examples: 'Refactor a subsystem · address tech debt · update domain contracts · add observability' },
+  { name: 'Emergent', who: 'PAT · Sev events · Reviewer feedback', examples: 'Patch regression · fix semantic drift · replace failed Execution Plan' },
+];
+
+const atomicity = [
+  { trait: 'Atomic', desc: 'Can be shipped independently.' },
+  { trait: 'Testable', desc: 'Clear invariants and observable success signals.' },
+  { trait: 'Deployable', desc: 'Moves through Ring 0 and Ring 1 on its own.' },
+  { trait: 'Reversible', desc: 'If it fails, rolls back without entangling the broader intent.' },
+];
+---
+
+<BaseLayout title="Intent Model" current="/intent">
+  <SectionHero
+    eyebrow="§5 · Intent Modeling"
+    title="GI's single unified input format."
+    lede="GI defines the internal mechanics of software creation, but not how an organization decides what to build. The Intent is the boundary between upstream strategy and the GI pipeline."
+  />
+
+  <section class="container-wide py-16">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] items-start">
+      <div>
+        <div class="eyebrow mb-3">§5.1 · What is an Intent?</div>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">A structured statement of the <em>why</em> and <em>what</em>.</h2>
+        <p class="mt-4 text-muted leading-relaxed">
+          An Intent expresses "what the system should achieve" without dictating "how to do it." It is not a user story. It does not decompose into tasks. It does not predefine architecture.
+        </p>
+        <p class="mt-3 text-muted leading-relaxed">
+          The Planner defines the <em>how</em>.
+        </p>
+      </div>
+      <div class="card p-6">
+        <div class="eyebrow mb-4">An Intent includes</div>
+        <ul class="space-y-3">
+          {intentAttributes.map((a, i) => (
+            <li class="flex items-start gap-4">
+              <span class="font-mono text-xs text-muted pt-1 w-6">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <div class="text-sm font-medium">{a.name}</div>
+                <div class="text-sm text-muted leading-snug">{a.desc}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§5.2 · Types of Intents</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">All intents flow through the same interface.</h2>
+      <p class="mt-3 text-muted leading-relaxed">Regardless of source — business, design, marketing, technical, emergent — every intent is converted into the same format and fed into the Planner.</p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {intentTypes.map((t) => (
+        <div class="card p-5">
+          <div class="chip mb-3"><span class="chip-dot" style="background: var(--accent);"></span>{t.name}</div>
+          <div class="font-mono text-[10px] uppercase tracking-wider text-muted mb-2">{t.who}</div>
+          <p class="text-sm leading-relaxed">{t.examples}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§5.4 · From Intent to Execution Plans</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">One intent. Many atomic Execution Plans.</h2>
+    </div>
+    <IntentFunnel />
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <div class="eyebrow mb-3">§5.5 · Atomicity</div>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Every Execution Plan ships independently.</h2>
+        <p class="mt-3 text-muted leading-relaxed">
+          Atomicity is the foundation of continuous flow. Large intents may decompose into dozens of small, individually shipped Execution Plans. This maintains velocity while preventing architectural collapse.
+        </p>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2">
+        {atomicity.map((a) => (
+          <div class="card p-5">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--accent);">{a.trait}</div>
+            <p class="text-sm leading-relaxed">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="card p-8 md:p-10 max-w-3xl">
+      <div class="eyebrow mb-3">§5.6 · Throttling</div>
+      <p class="text-lg md:text-xl leading-relaxed">
+        Intents flow downward; capacity signals flow upward. <span class="text-[color:var(--accent)]">The Planner controls work entry to protect velocity.</span>
+      </p>
+      <p class="mt-4 text-muted text-sm leading-relaxed">
+        No stakeholder, including PMs, can push work into the GI Flow beyond what the Planner authorizes.
+      </p>
+    </div>
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/intent" />
+  </div>
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+const team = [
+  { name: 'Architect', count: '1', role: 'Planner', exp: 'Senior · Staff · Principal', color: '#b794f4' },
+  { name: 'Builders', count: '2–3', role: 'Executors', exp: 'Mid-level to senior', color: '#67e8f9' },
+  { name: 'Reviewers', count: '3–4', role: 'Semantic gate', exp: 'Senior ICs', color: '#fbbf24' },
+  { name: 'PAT', count: '1–3', role: 'Continuous assurance', exp: 'Hybrid QA / engineering', color: '#86efac' },
+  { name: 'Junior', count: '1–2', role: 'Apprenticeship', exp: 'Pairing + PAT participation', color: '#7cc4ff' },
+];
+---
+
+<div class="card p-6 md:p-8">
+  <div class="mb-6">
+    <div class="eyebrow mb-1">A balanced GI team per domain</div>
+    <div class="text-sm text-muted">More Reviewers than Builders is intentional — review capacity is the throughput ceiling.</div>
+  </div>
+  <div class="grid gap-4 md:grid-cols-5">
+    {team.map((t) => (
+      <div class="card p-4 flex flex-col" style={`border-top: 3px solid ${t.color};`}>
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[10px] uppercase tracking-wider text-muted">{t.role}</span>
+          <span class="font-mono text-2xl font-semibold" style={`color: ${t.color}`}>{t.count}</span>
+        </div>
+        <div class="mt-2 text-base font-medium">{t.name}</div>
+        <div class="mt-1 text-xs text-muted leading-snug">{t.exp}</div>
+      </div>
+    ))}
+  </div>
+</div>

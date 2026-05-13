@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+
+const directions = [
+  {
+    no: '9.1',
+    title: 'Agentic Teams',
+    color: '#b794f4',
+    body: 'AI moves from supporting roles to participating as a role. Agentic Planners draft first-pass plans, Agentic Builders execute with minimal supervision, Agentic Reviewers run mechanical semantic checks, Agentic PAT performs anomaly detection.',
+    pull: 'Teams become human-guided agent teams, not human-only teams.',
+  },
+  {
+    no: '9.2',
+    title: 'Autonomous Test Evolution',
+    color: '#86efac',
+    body: 'AI maps unexplored state spaces, generates new invariants from observed behavior, evolves regression packs automatically, detects emergent cross-domain patterns, and simulates large-scale usage.',
+    pull: 'Testing shifts from a human-designed artifact to a self-improving safety lattice.',
+  },
+  {
+    no: '9.3',
+    title: 'AI-Enhanced Product Management',
+    color: '#7cc4ff',
+    body: 'AI assists PMs with user pattern analysis, problem definition, outcome-oriented intent generation, and pre-execution simulation. PMs shift to semantic definition and prioritization.',
+    pull: 'The Planner becomes the bridge between PM intent and executable AI plans.',
+  },
+  {
+    no: '9.4',
+    title: 'The Foundation for Post-Agile Engineering',
+    color: '#fbbf24',
+    body: 'GI is a transitional operating model. The natural successor is AI-native engineering — humans define meaning, constraints, and values; AI handles planning, execution, and continuous validation.',
+    pull: 'GI is the stable step before that world.',
+  },
+  {
+    no: '9.5',
+    title: 'The End of the Coordination Layer',
+    color: '#67e8f9',
+    body: 'Sprint ceremonies disappear. Product decomposition becomes AI-assisted. Code review becomes mostly semantic. QA becomes continuous and autonomous. DevOps becomes fully automated. Middle-layer coordination roles shrink.',
+    pull: 'Coordination becomes embedded in the system, not the organization.',
+  },
+];
+
+const equilibrium = [
+  { role: '1 Architect', body: 'Semantic authority over the domain.' },
+  { role: '1–2 Builders', body: 'AI supervisors keeping flow moving.' },
+  { role: '1–3 Reviewers', body: 'Semantic validators at the merge boundary.' },
+  { role: 'PAT + AI', body: 'Continuous, asynchronous validation.' },
+  { role: 'Agentic subsystems', body: 'Handle most execution and validation.' },
+];
+---
+
+<BaseLayout title="Future Directions" current="/future">
+  <SectionHero
+    eyebrow="§9 · Future Directions"
+    title="GI is not the endpoint. It's the first stable model."
+    lede="As AI capabilities mature, GI naturally evolves into deeper transformations. These are the trajectories ahead."
+  />
+
+  <section class="container-wide py-16 space-y-8">
+    {directions.map((d) => (
+      <article class="card p-7 md:p-10 grid gap-8 md:grid-cols-[200px_1fr]">
+        <header>
+          <div class="font-mono text-3xl font-semibold" style={`color: ${d.color}`}>§{d.no}</div>
+          <h2 class="mt-3 text-xl font-semibold leading-snug">{d.title}</h2>
+        </header>
+        <div>
+          <p class="text-[15px] leading-relaxed">{d.body}</p>
+          <p class="mt-5 pull-quote text-base" style={`border-color: ${d.color}`}>{d.pull}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8 max-w-2xl">
+      <div class="eyebrow mb-3">§9.6 · Long-term equilibrium</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Smaller. More focused. Dramatically more capable.</h2>
+      <p class="mt-3 text-muted leading-relaxed">
+        Human talent concentrates on meaning, correctness, coherence, values, architecture. Everything else becomes automated.
+      </p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-5">
+      {equilibrium.map((e) => (
+        <div class="card p-5">
+          <div class="eyebrow text-[10px] mb-2" style="color: var(--accent);">{e.role}</div>
+          <p class="text-sm text-muted leading-relaxed">{e.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="card p-10 md:p-16 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.4] pointer-events-none" style="background: radial-gradient(700px circle at 70% 30%, rgba(124,196,255,0.10), transparent 50%);"></div>
+      <div class="relative">
+        <div class="eyebrow mb-4">§10 · Conclusion</div>
+        <p class="text-2xl md:text-3xl font-semibold leading-snug max-w-3xl tracking-tight">
+          "The next era of engineering will be defined not by who writes the code, but by who defines the constraints, semantics, and values that guide the systems writing it."
+        </p>
+        <p class="mt-6 text-lg text-muted max-w-2xl leading-relaxed">
+          GI gives organizations the structure to make that transition deliberately, safely, and with clarity.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/whitepaper" class="btn btn-primary">Read the whitepaper</a>
+          <a href="/" class="btn btn-ghost">Back to start</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/future" />
+  </div>
+</BaseLayout>

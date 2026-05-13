@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import PrevNextNav from '../components/PrevNextNav.astro';
+import RolesGrid from '../components/diagrams/RolesGrid.astro';
+import TeamComposition from '../components/diagrams/TeamComposition.astro';
+
+const detailed = [
+  {
+    slug: 'planner',
+    name: 'Planner',
+    subtitle: 'Architect · §3.1',
+    color: '#b794f4',
+    role: 'The semantic entry point of the pipeline.',
+    description: "Planners translate intent into constraints, scope, and domain-aligned direction. Their primary artifact is the Execution Plan, which guides all downstream AI and Builder activity.",
+    responsibilities: [
+      'Interpret ambiguous intent and express it with crisp boundaries',
+      'Define architectural constraints, domain invariants, and integration surfaces',
+      'Collaborate with AI to produce the Execution Plan',
+      'Clarify what "good" looks like without dictating mechanical implementation',
+      'Ensure work fits cleanly within the domain without cross-team leakage',
+    ],
+    doesNot: [
+      'Granular task breakdown',
+      'Write scaffolding or boilerplate code',
+      'Dictate step-by-step sequence of mechanical work',
+    ],
+    human:
+      'Fundamentally a thinking job, not a production job. It attracts engineers who enjoy systems reasoning, architectural judgment, and shaping the long-term coherence of a domain. Rather than being replaced by AI, the Planner becomes more central — their judgment governs the system.',
+  },
+  {
+    slug: 'builder',
+    name: 'Builder',
+    subtitle: 'Executor · §3.2',
+    color: '#67e8f9',
+    role: 'Owns execution. Supervises agentic AI.',
+    description:
+      'Builders supervise AI as it generates code, tests, migrations, refactors, and artifacts aligned with the Execution Plan. They ensure fidelity to constraints and resolve ambiguity without slowing flow.',
+    responsibilities: [
+      'Drive AI generation of code, tests, and system updates',
+      'Maintain scope and constraint alignment with the Execution Plan',
+      'Perform first-pass validation before sending work to review',
+      'Request clarification from the Planner when ambiguity appears',
+      'Keep the pipeline unblocked',
+    ],
+    doesNot: ['Make architectural decisions', 'Expand the problem beyond defined scope', 'Perform semantic approval'],
+    human:
+      'Work shifts from mechanical typing to high-leverage orchestration. Builders apply engineering intuition, debugging skill, and contextual insight to keep AI output aligned. This role fits engineers who enjoy rapid iteration and continuous movement.',
+  },
+  {
+    slug: 'reviewer',
+    name: 'Reviewer',
+    subtitle: 'Semantic Gatekeeper · §3.3',
+    color: '#fbbf24',
+    role: 'The final semantic authority before release.',
+    description:
+      'Reviewers ensure output matches intent, respects domain invariants, and is safe to ship. The only human positioned at the merge boundary.',
+    responsibilities: [
+      'Perform semantic review (meaning, correctness, alignment)',
+      'Validate architectural coherence and invariant integrity',
+      'Approve, reject, or request clarification',
+      'Oversee release flow across rings (Ring 0 → Ring 1 → general)',
+      'Trigger severity responses when issues surface (Sev1–Sev5)',
+    ],
+    doesNot: ['Rewrite code manually', 'Perform mechanical / syntax / lint review', 'Expand scope or re-plan'],
+    human:
+      'Reviewers carry the highest level of cognitive responsibility. Their work resembles editorial curation or architectural judgment more than classical code review. It is a role defined by trust, not throughput.',
+  },
+  {
+    slug: 'pat',
+    name: 'PAT',
+    subtitle: 'Product Acceptance Testing · §3.4',
+    color: '#86efac',
+    role: 'Continuous, asynchronous system validation.',
+    description:
+      'PAT operates outside the Planner-Builder-Reviewer loop and ensures correctness at the system level rather than the artifact level.',
+    responsibilities: [
+      'Exploratory testing probing domain and system-level edge cases',
+      'Regression verification and invariant stress-testing',
+      'Monitoring and surfacing defects from production rings',
+      'Certifying the system under evolving conditions',
+      'Feeding insights back into Planner / Reviewer judgment',
+    ],
+    doesNot: ['Gate releases or hold batches for sign-off', 'Replace Reviewer judgment', 'Stop flow except via Sev5'],
+    human:
+      'Exploratory testing requires curiosity, intuition, and an ability to notice the unexpected. AI assists with permutations, but humans define where exploration should go. Humans test ideas; AI tests permutations.',
+  },
+];
+---
+
+<BaseLayout title="Roles" current="/roles">
+  <SectionHero
+    eyebrow="§3 · Roles"
+    title="Three human roles. One continuous validation function."
+    lede="Planner, Builder, Reviewer — supported by PAT. These are semantic responsibilities, not job titles. Their clarity is the mechanism that enables continuous flow."
+  />
+
+  <section class="container-wide py-16">
+    <RolesGrid showPAT compact />
+  </section>
+
+  <section class="container-wide pb-8 space-y-10">
+    {detailed.map((r) => (
+      <article id={r.slug} class="card p-7 md:p-10 grid gap-8 md:grid-cols-[260px_1fr]">
+        <header class="md:border-r md:border-subtle md:pr-8">
+          <div class="flex items-center gap-3">
+            <span class="chip" style={`color: ${r.color}; border-color: color-mix(in srgb, ${r.color} 50%, transparent);`}>
+              <span class="chip-dot" style={`background: ${r.color}`}></span>
+              {r.name}
+            </span>
+          </div>
+          <div class="font-mono text-[11px] uppercase tracking-wider text-muted mt-3">{r.subtitle}</div>
+          <h2 class="mt-5 text-xl font-semibold leading-snug">{r.role}</h2>
+        </header>
+        <div>
+          <p class="text-[15px] text-muted leading-relaxed">{r.description}</p>
+
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div>
+              <div class="eyebrow mb-3" style={`color: ${r.color}`}>Responsibilities</div>
+              <ul class="space-y-2 text-sm">
+                {r.responsibilities.map((d) => (
+                  <li class="flex gap-2 leading-relaxed"><span style={`color: ${r.color}`}>→</span><span>{d}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div class="eyebrow mb-3">Does not</div>
+              <ul class="space-y-2 text-sm text-muted">
+                {r.doesNot.map((d) => (
+                  <li class="flex gap-2 leading-relaxed"><span class="opacity-50">×</span><span>{d}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <blockquote class="mt-6 pull-quote text-[15px] leading-relaxed" style={`border-color: ${r.color}`}>
+            <span class="block font-mono text-[10px] uppercase tracking-wider opacity-70 mb-1.5" style={`color: ${r.color}`}>Human dimension</span>
+            {r.human}
+          </blockquote>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="container-wide py-16">
+    <div class="mb-8">
+      <div class="eyebrow mb-3">§3.5 · The GI Team</div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">A fully formed GI team</h2>
+      <p class="mt-3 text-muted max-w-2xl leading-relaxed">
+        A team owns a domain and is accountable for continuous flow, semantic clarity, and system integrity. It operates autonomously and interfaces with other teams only through explicit contracts and invariants.
+      </p>
+    </div>
+    <TeamComposition />
+  </section>
+
+  <div class="container-wide pb-12">
+    <PrevNextNav current="/roles" />
+  </div>
+</BaseLayout>

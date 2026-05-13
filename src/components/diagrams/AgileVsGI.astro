@@ -1,0 +1,31 @@
+---
+const rows = [
+  { agile: 'Batch-driven sprint cycles', gi: 'Continuous unbatched flow' },
+  { agile: 'Standups, grooming, planning meetings', gi: 'Semantic clarity via Execution Plans' },
+  { agile: 'Manual user-story decomposition', gi: 'AI generates scaffolding from intent' },
+  { agile: 'PR queues stalled on review', gi: 'Single Reviewer as semantic gate' },
+  { agile: 'End-of-sprint QA batches', gi: 'PAT validates the running system' },
+  { agile: 'Scales with headcount', gi: 'Scales with AI capability' },
+];
+---
+
+<div class="card overflow-hidden">
+  <div class="grid grid-cols-2 border-b border-subtle">
+    <div class="px-5 py-3">
+      <div class="font-mono text-[10px] uppercase tracking-wider text-muted">Agile</div>
+      <div class="text-sm font-medium mt-0.5">Optimized for human execution</div>
+    </div>
+    <div class="px-5 py-3 border-l border-subtle">
+      <div class="font-mono text-[10px] uppercase tracking-wider" style="color: var(--accent);">Guided Intelligence</div>
+      <div class="text-sm font-medium mt-0.5">Optimized for AI execution + human semantics</div>
+    </div>
+  </div>
+  <div>
+    {rows.map((r, i) => (
+      <div class:list={['grid grid-cols-2 text-sm', i < rows.length - 1 && 'border-b border-subtle']}>
+        <div class="px-5 py-3.5 text-muted line-through decoration-1 decoration-[color:var(--fg-muted)]/40">{r.agile}</div>
+        <div class="px-5 py-3.5 border-l border-subtle">{r.gi}</div>
+      </div>
+    ))}
+  </div>
+</div>
