@@ -26,7 +26,7 @@ const detailed = [
       'Dictate step-by-step sequence of mechanical work',
     ],
     human:
-      'Fundamentally a thinking job, not a production job. It attracts engineers who enjoy systems reasoning, architectural judgment, and shaping the long-term coherence of a domain. Rather than being replaced by AI, the Planner becomes more central — their judgment governs the system.',
+      'A thinking job, not a production job. It draws engineers who enjoy systems reasoning, architectural judgment, and shaping the long-term coherence of a domain. AI doesn\'t replace the Planner. It makes the Planner more central, since their judgment governs the system.',
   },
   {
     slug: 'builder',
@@ -54,7 +54,7 @@ const detailed = [
     color: '#fbbf24',
     role: 'The final semantic authority before release.',
     description:
-      'Reviewers ensure output matches intent, respects domain invariants, and is safe to ship. The only human positioned at the merge boundary.',
+      'Reviewers make sure output matches intent, respects domain invariants, and is safe to ship. They are the only human at the merge boundary.',
     responsibilities: [
       'Perform semantic review (meaning, correctness, alignment)',
       'Validate architectural coherence and invariant integrity',
@@ -64,7 +64,7 @@ const detailed = [
     ],
     doesNot: ['Rewrite code manually', 'Perform mechanical / syntax / lint review', 'Expand scope or re-plan'],
     human:
-      'Reviewers carry the highest level of cognitive responsibility. Their work resembles editorial curation or architectural judgment more than classical code review. It is a role defined by trust, not throughput.',
+      'Reviewers carry the highest cognitive load on the team. Their work looks more like editorial curation or architectural judgment than classical code review. It\'s a role defined by trust, not throughput.',
   },
   {
     slug: 'pat',
@@ -73,7 +73,7 @@ const detailed = [
     color: '#86efac',
     role: 'Continuous, asynchronous system validation.',
     description:
-      'PAT operates outside the Planner-Builder-Reviewer loop and ensures correctness at the system level rather than the artifact level.',
+      'PAT operates outside the Planner-Builder-Reviewer loop. It checks correctness at the system level, not the artifact level.',
     responsibilities: [
       'Exploratory testing probing domain and system-level edge cases',
       'Regression verification and invariant stress-testing',
@@ -83,7 +83,7 @@ const detailed = [
     ],
     doesNot: ['Gate releases or hold batches for sign-off', 'Replace Reviewer judgment', 'Stop flow except via Sev5'],
     human:
-      'Exploratory testing requires curiosity, intuition, and an ability to notice the unexpected. AI assists with permutations, but humans define where exploration should go. Humans test ideas; AI tests permutations.',
+      'Exploratory testing needs curiosity, intuition, and an eye for the unexpected. AI handles the permutations, but humans decide where exploration should go. Humans test ideas. AI tests permutations.',
   },
 ];
 ---
@@ -91,8 +91,8 @@ const detailed = [
 <BaseLayout title="Roles" current="/roles">
   <SectionHero
     eyebrow="§3 · Roles"
-    title="Three human roles. One continuous validation function."
-    lede="Planner, Builder, Reviewer — supported by PAT. These are semantic responsibilities, not job titles. Their clarity is the mechanism that enables continuous flow."
+    title="Three human roles, one continuous validation function."
+    lede="Planner, Builder, Reviewer, with PAT running alongside. These are responsibilities, not job titles. Their clarity is what makes continuous flow possible."
   />
 
   <section class="container-wide py-16">
@@ -148,7 +148,7 @@ const detailed = [
       <div class="eyebrow mb-3">§3.5 · The GI Team</div>
       <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">A fully formed GI team</h2>
       <p class="mt-3 text-muted max-w-2xl leading-relaxed">
-        A team owns a domain and is accountable for continuous flow, semantic clarity, and system integrity. It operates autonomously and interfaces with other teams only through explicit contracts and invariants.
+        A team owns a domain and is accountable for continuous flow, semantic clarity, and system integrity. It runs autonomously and interfaces with other teams only through explicit contracts and invariants.
       </p>
     </div>
     <TeamComposition />

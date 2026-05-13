@@ -9,15 +9,15 @@ import AgileVsGI from '../components/diagrams/AgileVsGI.astro';
 const principles = [
   {
     title: 'Agile breaks under AI acceleration',
-    body: "Sprint cycles, QA phases, multi-stage review gates were designed to stabilize humans at human speed. When execution happens in seconds, the stabilizers reverse polarity and become bottlenecks.",
+    body: "Sprint cycles, QA phases, and staged review gates were built to stabilize work moving at human speed. When execution takes seconds, those same stabilizers turn into bottlenecks.",
   },
   {
     title: 'Coordination is the new constraint',
-    body: 'AI absorbs mechanical work. What remains is intent clarification, architectural alignment, semantic review — the human activities around code. Execution becomes cheap; misalignment becomes expensive.',
+    body: 'AI absorbs the mechanical work. What is left is the human work around code: clarifying intent, aligning on architecture, reviewing for meaning. Execution gets cheap. Misalignment gets expensive.',
   },
   {
     title: '10× via semantic clarity, not raw output',
-    body: 'AI already writes code 100× faster. The 10× system-level multiplier comes from eliminating the surrounding human overhead — not from typing faster.',
+    body: 'AI already writes code 100× faster. The 10× system-level multiplier comes from removing the human overhead that surrounds that code, not from typing faster.',
   },
 ];
 ---
@@ -30,12 +30,12 @@ const principles = [
 
     <div class="container-wide relative py-24 md:py-32">
       <div class="eyebrow mb-6">Whitepaper · An AI-native engineering operating model</div>
-      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight max-w-5xl leading-[1.05] text-gradient">
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight max-w-5xl leading-[1.15] pb-2 text-gradient">
         Guided Intelligence
       </h1>
       <p class="mt-6 text-xl md:text-2xl text-muted max-w-3xl leading-relaxed">
-        A Human-in-the-Loop, AI-Native engineering operating model aimed at <span class="text-[color:var(--fg)]">10× velocity</span> with stability.
-        Humans guide. Machines execute. Flow is continuous.
+        A Human-in-the-Loop, AI-Native engineering operating model built for <span class="text-[color:var(--fg)]">10× velocity</span> without losing stability.
+        Humans set direction. AI does the work. The pipeline keeps moving.
       </p>
 
       <div class="mt-10 flex flex-wrap items-center gap-3">
@@ -68,7 +68,7 @@ const principles = [
         The constraint moved. The process didn't.
       </h2>
       <p class="mt-4 text-lg text-muted leading-relaxed">
-        For two decades, productivity gains came from layering on top of Agile and DevOps. AI breaks the equilibrium — and exposes the mismatch between capability and process.
+        For two decades, productivity gains came from layering on top of Agile and DevOps. AI breaks that equilibrium and exposes the mismatch between what teams can now do and how they're organized to do it.
       </p>
     </div>
 
@@ -92,9 +92,9 @@ const principles = [
     <div class="flex items-end justify-between flex-wrap gap-6 mb-12">
       <div class="max-w-2xl">
         <div class="eyebrow mb-3">§3 · Roles</div>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Three roles. Four cognitive modes.</h2>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Three roles, plus continuous validation.</h2>
         <p class="mt-4 text-lg text-muted leading-relaxed">
-          GI organizes work around <strong>Planner</strong>, <strong>Builder</strong>, and <strong>Reviewer</strong> — supported by continuous <strong>PAT</strong> validation. These are semantic responsibilities, not job titles.
+          GI organizes work around the <strong>Planner</strong>, <strong>Builder</strong>, and <strong>Reviewer</strong>, with continuous <strong>PAT</strong> validation running alongside. These are responsibilities, not job titles.
         </p>
       </div>
       <a href="/roles" class="btn btn-ghost">All roles →</a>
@@ -109,7 +109,7 @@ const principles = [
         <div class="eyebrow mb-3">§4 · The Flow</div>
         <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">From intent to production, continuously.</h2>
         <p class="mt-4 text-lg text-muted leading-relaxed">
-          One Execution Plan at a time. No sprint boundaries. No release windows. PAT validates the running system asynchronously.
+          One Execution Plan at a time, with no sprint boundaries or release windows. PAT validates the running system asynchronously in the background.
         </p>
       </div>
       <a href="/flow" class="btn btn-ghost">See backflow paths →</a>
@@ -124,7 +124,7 @@ const principles = [
         <div class="eyebrow mb-3">§7 · Geometry</div>
         <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Domains, Tracks, and Cells.</h2>
         <p class="mt-4 text-lg text-muted leading-relaxed">
-          A Planner governs an entire <strong>Domain</strong>. Builders and Reviewers certify along one-dimensional <strong>Tracks</strong>. Execution Plans land in atomic <strong>Cells</strong> at the intersections.
+          A Planner owns a full <strong>Domain</strong>. Builders and Reviewers certify along one-dimensional <strong>Tracks</strong>. Execution Plans land in atomic <strong>Cells</strong> at the intersections.
         </p>
         <a href="/domains" class="btn btn-ghost mt-6">Explore the geometry →</a>
       </div>
@@ -137,9 +137,9 @@ const principles = [
     <div class="flex items-end justify-between flex-wrap gap-6 mb-10">
       <div class="max-w-2xl">
         <div class="eyebrow mb-3">§6 · Safety</div>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Velocity is continuous. Safety is continuous.</h2>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Continuous validation, layered defenses.</h2>
         <p class="mt-4 text-lg text-muted leading-relaxed">
-          A layered system replaces sprint-based QA with always-on validation. Only Sev5 stops the line.
+          A layered system replaces sprint-based QA with always-on validation. Only a Sev5 stops the line.
         </p>
       </div>
       <a href="/safety" class="btn btn-ghost">All seven layers →</a>
@@ -154,10 +154,10 @@ const principles = [
       <div class="relative max-w-3xl">
         <div class="eyebrow mb-4">A new equilibrium</div>
         <h2 class="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
-          Velocity with stability. Semantics with automation. Human judgment at the center.
+          Speed with stability, automation with judgment.
         </h2>
         <p class="mt-6 text-lg text-muted leading-relaxed">
-          GI is not a radical reinvention — it is the minimal set of structural rules required to let AI-native engineering work at scale, safely, predictably.
+          GI isn't a radical reinvention. It's the minimum set of structural rules needed for AI-native engineering to work at scale without breaking things.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/whitepaper" class="btn btn-primary">Read the full whitepaper</a>

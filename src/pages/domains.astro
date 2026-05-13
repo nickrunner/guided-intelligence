@@ -22,7 +22,7 @@ const definitions = [
     dim: 'Cell',
     suffix: '0D',
     color: '#67e8f9',
-    body: 'The atomic responsibility point. Each Cell is the intersection of a Capability Track and a Layer Track — the smallest unit of correctness in GI.',
+    body: 'The atomic responsibility point. Each Cell is the intersection of a Capability Track and a Layer Track. It is the smallest unit of correctness in GI.',
   },
 ];
 
@@ -35,7 +35,7 @@ const cellRules = [
 
 const certification = [
   { role: 'Builder', color: '#67e8f9', body: 'Certified on one or more Tracks. Requires semantic fluency, plan-execution accuracy, invariant familiarity, and capacity to handle every Cell involving the Track.' },
-  { role: 'Reviewer', color: '#fbbf24', body: 'Deeper semantic mastery. Multi-Track fluency, cross-Cell implication awareness, judgment about invariant correctness. Not Cell-certified — Track-plus oversight certified.' },
+  { role: 'Reviewer', color: '#fbbf24', body: 'Deeper semantic mastery. Multi-Track fluency, awareness of cross-Cell implications, and judgment about invariant correctness. Not Cell-certified; Track-plus-oversight certified.' },
   { role: 'Planner', color: '#b794f4', body: 'Eligible after certification across all Tracks in a Domain, demonstrated cross-Track reasoning, and proven ability to manage Cell interactions holistically.' },
 ];
 ---
@@ -44,7 +44,7 @@ const certification = [
   <SectionHero
     eyebrow="§7 · Architectural Geometry"
     title="Domains, Tracks, and Cells."
-    lede="GI achieves velocity by structuring responsibility into a clear, hierarchical geometry. Planners govern Domains; Builders and Reviewers certify on Tracks; Execution Plans target Cells."
+    lede="GI gets its velocity from a clear, hierarchical geometry of responsibility. Planners govern Domains, Builders and Reviewers certify on Tracks, and Execution Plans target Cells."
   />
 
   <section class="container-wide py-16">
@@ -71,7 +71,7 @@ const certification = [
         <div class="eyebrow mb-3">§7.3 · Cells</div>
         <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Atomicity for high-velocity flow.</h2>
         <p class="mt-3 text-muted leading-relaxed">
-          Cells create the atomicity necessary for high-velocity flow without semantic sprawl. They are the enforcement points where invariants attach and architectural edges are made predictable.
+          Cells give you atomicity at high velocity without semantic sprawl. They're the enforcement points where invariants attach and architectural edges become predictable.
         </p>
       </div>
       <ul class="space-y-3">
@@ -90,7 +90,7 @@ const certification = [
       <div class="eyebrow mb-3">§7.5 · Staffing through Tracks</div>
       <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Certification, not org chart.</h2>
       <p class="mt-3 text-muted leading-relaxed">
-        Staffing depends on Track certification, not arbitrary team structures. Expertise becomes legible.
+        Staffing follows Track certification, not arbitrary team structures. Expertise becomes legible.
       </p>
     </div>
     <div class="grid gap-5 md:grid-cols-3">

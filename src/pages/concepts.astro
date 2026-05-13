@@ -9,19 +9,19 @@ const concepts = [
     no: '2.1',
     title: 'Human-in-the-Loop as a First Principle',
     color: '#7cc4ff',
-    body: 'Humans no longer execute most of the work. Instead, they guide, constrain, and validate it. HIL in GI is not "humans approving AI output" — it is a structured responsibility model.',
+    body: 'Humans no longer execute most of the work. They guide it, constrain it, and validate it. HIL in GI isn\'t "humans approving AI output." It\'s a structured responsibility model.',
     points: [
       { role: 'Planners', text: 'set intent, constraints, and architectural boundaries.' },
-      { role: 'Builders', text: 'supervise AI execution and maintain fidelity to those constraints.' },
+      { role: 'Builders', text: 'supervise AI execution and keep it faithful to those constraints.' },
       { role: 'Reviewers', text: 'perform semantic approval and protect domain invariants.' },
     ],
-    closing: 'The goal is not to remove humans — it is to separate humans from work that no longer requires them.',
+    closing: 'The goal isn\'t to remove humans. It\'s to separate humans from work that no longer requires them.',
   },
   {
     no: '2.2',
     title: 'From Mechanical to Semantic Work',
     color: '#b794f4',
-    body: 'Mechanical work — coding, scaffolding, refactors, formatting — moves to AI. What remains is the semantic layer: what should be built, why it matters, whether it preserves system integrity.',
+    body: 'Mechanical work moves to AI: coding, scaffolding, refactors, formatting. What is left is the semantic layer: what should be built, why it matters, and whether it preserves system integrity.',
     points: [
       { role: 'Mechanical', text: 'cheap. Deterministic. Executed by AI.' },
       { role: 'Semantic', text: 'expensive. Judgment-driven. Owned by humans.' },
@@ -32,7 +32,7 @@ const concepts = [
     no: '2.3',
     title: 'Continuous Flow vs. Batching',
     color: '#67e8f9',
-    body: 'Batching — sprints, release trains, QA cycles, PR queues — stabilizes human-paced work by delaying it. When AI executes instantly, batching becomes the primary source of latency.',
+    body: 'Batching (sprints, release trains, QA cycles, PR queues) stabilizes human-paced work by delaying it. When AI executes instantly, that same batching becomes the main source of latency.',
     points: [
       { role: 'No sprint boundaries', text: 'work moves to the next step as soon as the current one completes.' },
       { role: 'No release windows', text: 'changes deploy continuously through rings.' },
@@ -44,12 +44,12 @@ const concepts = [
     no: '2.4',
     title: 'The 10× Hypothesis',
     color: '#fbbf24',
-    body: 'AI writes code 100× faster. The system-level 10× multiplier comes from eliminating the surrounding human overhead — not from typing faster.',
+    body: 'AI writes code 100× faster. The 10× system-level multiplier comes from removing the human overhead around that code, not from typing faster.',
     points: [
       { role: 'Limiting reagent', text: 'shifts from engineering labor hours to semantic clarity.' },
       { role: 'Direction', text: '"10×" is a target architecture for velocity, not a fixed performance number.' },
     ],
-    closing: 'GI creates the conditions under which order-of-magnitude improvement is achievable as AI continues to advance.',
+    closing: 'GI creates the conditions for order-of-magnitude improvement as AI continues to advance.',
   },
 ];
 ---
@@ -57,8 +57,8 @@ const concepts = [
 <BaseLayout title="Core Concepts" current="/concepts">
   <SectionHero
     eyebrow="§2 · Core Concepts"
-    title="Humans guide. Machines execute. Flow is continuous."
-    lede="GI is built around four foundational ideas that establish the operating assumptions for every role, workflow, and safety mechanism in the system."
+    title="Humans set direction. AI does the work."
+    lede="GI rests on four ideas that shape every role, workflow, and safety mechanism in the system."
   />
 
   <section class="container-wide py-20">
@@ -99,7 +99,7 @@ const concepts = [
     <div class="card p-8 md:p-10">
       <div class="eyebrow mb-3">§1.2 · The new constraint</div>
       <p class="text-xl md:text-2xl leading-relaxed max-w-3xl">
-        "If AI performs mechanical work orders of magnitude faster, engineering productivity becomes a function of <span class="text-[color:var(--accent)]">human semantic clarity</span> — not human labor volume."
+        "If AI does mechanical work orders of magnitude faster, engineering productivity becomes a function of <span class="text-[color:var(--accent)]">human semantic clarity</span>, not human labor volume."
       </p>
     </div>
   </section>
